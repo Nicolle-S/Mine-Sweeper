@@ -5,6 +5,8 @@
  */
 package mine.sweeper;
 
+import Model.Board_Model;
+
 /**
  *
  * @author Nicolle'S
@@ -15,7 +17,12 @@ public class MineSweeper {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("holis");
+        
+        Board_Model obj = new Board_Model();
+        
+        obj.load_Board();
+        obj.Load_adjacent();
+        obj.Print_Board();
     }
     
 }
