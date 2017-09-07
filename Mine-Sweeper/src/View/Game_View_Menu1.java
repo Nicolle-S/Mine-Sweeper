@@ -8,7 +8,7 @@ package View;
 import javax.swing.JButton;
 
 /**
- *
+ *  Representa el menu principal de la palicacion
  * @author DilanU
  */
 public class Game_View_Menu1 extends javax.swing.JPanel {
@@ -88,17 +88,29 @@ public class Game_View_Menu1 extends javax.swing.JPanel {
     private javax.swing.JLabel tittle;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Devuelve el boton para salir
+     * @return boton para salir
+     */
     public JButton getExit() {
         return exit;
     }
-
+    
+    
+    /**
+     * Devuelve el boton del KColor
+     * @return boton del KColor
+     */
     public JButton getkColor() {
         return kColor;
     }
 
+    
+    /**
+     * Devuelve el boton de mineswipper
+     * @return boton de mineswipper
+     */
     public JButton getMines() {
         return mines;
     }
-
-
-}
+} // fin de Game_View_Menu1

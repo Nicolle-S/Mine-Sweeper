@@ -8,7 +8,7 @@ package View;
 import javax.swing.JButton;
 
 /**
- *
+ * Representa un submenu en la aplicacion
  * @author DilanU
  */
 public class Game_View_Menu2 extends javax.swing.JPanel {
@@ -40,11 +40,6 @@ public class Game_View_Menu2 extends javax.swing.JPanel {
 
         square.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         square.setText("Square");
-        square.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                squareActionPerformed(evt);
-            }
-        });
 
         hexagon.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         hexagon.setText("Hexagon");
@@ -83,10 +78,6 @@ public class Game_View_Menu2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void squareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_squareActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_squareActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hexagon;
@@ -95,17 +86,29 @@ public class Game_View_Menu2 extends javax.swing.JPanel {
     private javax.swing.JLabel tittle;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Devuelve el boton para el modo hexagon
+     * @return boton de modo hexagon
+     */
     public JButton getHexagon() {
         return hexagon;
     }
-
+    
+    
+    /**
+     * Devuelve el boton del menu principal
+     * @return boton del menu principal
+     */
     public JButton getMenu() {
         return menu;
     }
-
+    
+    
+    /**
+     * Devuelve el boton del modo tradicional
+     * @return boton del modo tradicional
+     */
     public JButton getSquare() {
         return square;
     }
-
-
-}
+} // fin de Game_View_Menu2
