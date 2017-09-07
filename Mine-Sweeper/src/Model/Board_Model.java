@@ -9,31 +9,36 @@ import java.util.Random;
 
 /**
  *
- * Esta clase sera la encargarda de manejar todo lo referente a la logica que debe tener el tablero de juego, el cual consta de una matriz numerica.
+ * Esta clase sera la encargarda de manejar todo lo referente a la logica que 
+ * debe tener el tablero de juego, el cual consta de una matriz numerica.
+ * A su vez posee dos subclases que definen el diseno del tablero que se jugara
  */
-public class Board_Model {
+public abstract class Board_Model {
     
-    private final int COVER_FOR_CELL; // cubierta
+    protected final int COVER_FOR_CELL; // celda cubierta
     private final int MARK_FOR_CELL; // celda marcada
-    private final int EMPTY_CELL; // celda vacia
-    private final int MINE_CELL; // celda con una mina
-    private final int COVERED_MINE_CELL; // celda cubierta con una mina
-    private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
+    protected final int EMPTY_CELL; // celda vacia
+    protected final int MINE_CELL; // celda con una mina
+    //private final int COVERED_MINE_CELL; // celda cubierta con una mina
+    //private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
 
     private final int N_MINES; // numero de minas
-    private final int N_ROWS; // filas
-    private final int N_COLS; // columnas
+    protected final int N_ROWS; // filas
+    protected final int N_COLS; // columnas
+    protected int[][] table;
+   
     
-    private int[][] table;
-
+    /** 
+     * Constructor de la Clase. 
+     */
     public Board_Model(){
         
         COVER_FOR_CELL = 10; 
         MARK_FOR_CELL = 10; 
         EMPTY_CELL = 0; 
         MINE_CELL = 9; 
-        COVERED_MINE_CELL = MINE_CELL + COVER_FOR_CELL;
-        MARKED_MINE_CELL = COVERED_MINE_CELL + MARK_FOR_CELL;
+        //COVERED_MINE_CELL = MINE_CELL + COVER_FOR_CELL;
+        //MARKED_MINE_CELL = COVERED_MINE_CELL + MARK_FOR_CELL;
 
         N_MINES = 40; 
         N_ROWS = 16; 
@@ -42,22 +47,23 @@ public class Board_Model {
         table= new int [N_ROWS][N_COLS];
     }
     
-    /*
-    Metodo encargado de cargar la matriz con las minas, las celdas vacias y los valores adyacentes de cada casilla.
-    */
+    
+    /**
+     * Metodo encargado de cargar la matriz con las minas, las celdas vacias y los valores adyacentes de cada casilla.
+     */
     public void load_Board(){
         
         Random a = new Random();
         int X, Y, mines = 0;
         
         /*
-        primeramente inicializo en cero y cubiertas todas las casillas
+        primeramente cargamos la matriz con celdas vacias
         */
         for (int i = 0; i < N_ROWS; i++) {
             
             for (int j = 0; j < N_COLS; j++) {
                 
-                table[i][j] = 0;
+                table[i][j] = EMPTY_CELL;
             }
             
         }
@@ -78,7 +84,7 @@ public class Board_Model {
                 if(Y < 0)
                     Y *= -1;
                 
-            }while(table[X][Y] != 0);
+            }while(table[X][Y] != EMPTY_CELL);
 
             table[X][Y] = MINE_CELL;
             mines ++;
@@ -87,97 +93,34 @@ public class Board_Model {
         
     }
     
-    /*
-    establezco los valores de la cantidad de minas que posee una celda en particular
-    */
-    public void Load_adjacent(){
+    
+    /**
+     * Cubro de manera logica el valor de todas las casillas de la matriz
+     */
+    public void cover_all_cell(){
         
         for (int i = 0; i < N_ROWS; i++) {
             
             for (int j = 0; j < N_COLS; j++) {
                 
-                if(table[i][j] == 9){
-                    
-                    /*
-                    verifico la celda que se encuenta a la izquiera
-                    */
-                    if( (j - 1) > 0 && table[i][j-1] != 9){
-                        
-                        table[i][j-1] += 1;
-                    }
-                    
-                    /*
-                    verifico la celda que se encuenta a la derecha
-                    */
-                    if( (j + 1) < N_COLS && table[i][j+1] != 9){
-                        
-                        table[i][j+1] += 1;
-                    }
-                    
-                    /*
-                    verifico la celda que esta encima de la mina
-                    */
-                    if( (i - 1) > 0 && table[i-1][j] != 9 ){
-                        
-                        table[i-1][j] += 1;
-                    }
-                    
-                    /*
-                    verifico la celda que esta debajo de la mina
-                    */
-                    if( (i + 1) < N_ROWS && table[i+1][j] != 9 ){
-                        
-                        table[i+1][j] += 1;
-                    }
-                    
-                    /*
-                    verifico la diagonal superior izquierda
-                    */
-                    if( (i - 1) > 0 && (j - 1) > 0 && table[i-1][j-1] != 9 ){
-                        
-                        table[i-1][j-1] += 1;
-                    }
-                    
-                    /*
-                    verifico la diagonal superior derecha
-                    */
-                    if( (i - 1) > 0 && (j + 1) < N_COLS && table[i-1][j+1] != 9 ){
-                        
-                        table[i-1][j+1] += 1;
-                    }
-                    
-                    /*
-                    verifico la diagonal inferior izquierda
-                    */
-                    if( (i + 1) < N_ROWS && (j - 1) > 0 && table[i+1][j-1] != 9 ){
-                        
-                        table[i+1][j-1] += 1;
-                    }
-                    
-                    /*
-                    verifico la diagonal inferior derecha
-                    */
-                    if( (i + 1) < N_ROWS && (j + 1) < N_COLS && table[i+1][j+1] != 9 ){
-                        
-                        table[i+1][j+1] += 1;
-                    }
-                }   
+                table[i][j] += COVER_FOR_CELL;
             }   
-        }    
+        }  
     }
+   
     
-    public void Print_Board(){
-        
-        for (int i = 0; i < N_ROWS; i++) {
-            
-            System.out.println("");
-            
-            for (int j = 0; j < N_COLS; j++) {
-                
-                System.out.print(" "+table[i][j]);
-            }
-        }
-    }    
+    /**
+     * establezco los valores de la cantidad de minas que posee una celda en particular
+     */
+    abstract public void Load_adjacent();
     
     
+    /**
+     * recibe la posicion de una celda vacia que fue seleccionada y busca
+     * todas las celdas vacias contiguas a esta para descubrirlas
+     * 
+     * @param i coordenada de la fila de la celda que fue seleccionada
+     * @param j coordenada de la columna de la celda que fue seleccionada
+     */
+    abstract public void search_campEmpty(int i, int j);   
 }
