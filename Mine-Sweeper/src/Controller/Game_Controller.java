@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Representa la venatana de la aplicacion.
@@ -20,6 +21,7 @@ public class Game_Controller extends JFrame
 {
     private Game_Model game_model; // modelo del juego
     private ButtonAdapter listener_button; // listenner
+    private JPanel actualView; // vista actual  
     
     
     /**
@@ -35,7 +37,10 @@ public class Game_Controller extends JFrame
         this.setSize( Game_Model.WIDTH, Game_Model.HEIGHT);
         
         this.game_model = new Game_Model(); // creo modelo
-        this.add( this.game_model.getMain_menu() ); // cargo vista
+        this.actualView = this.game_model.getMain_menu(); // obtengo la vista
+        this.getContentPane().add( this.actualView ); // cargo vista
+        this.invalidate();
+        this.validate();
         this.listener_button = new ButtonAdapter(); // creo listener
         
         // agrego listener a botones
@@ -46,6 +51,8 @@ public class Game_Controller extends JFrame
         this.game_model.getMines_menu().getHexagon().addActionListener(listener_button);
         this.game_model.getMines_menu().getMenu().addActionListener(listener_button);
     } // fin de Game_Controller
+    
+    
     
     
     /**
@@ -63,18 +70,19 @@ public class Game_Controller extends JFrame
             JButton source =  (JButton)e.getSource(); // fuente del evento
             
             
+            // actua de acuerdo a la entrada del usuario
             switch( source.getText() )
             {
                 case "MinesWipper":
-                    System.out.println("MinesWiper");
+                    setActualView( game_model.getMines_menu() );
                     break;
                     
                 case "K-Color":
-                    System.out.println("K-Color");
+                    System.out.println("Barredor de color");
                     break;
                     
                 case "Exit":
-                    System.out.println("Exit");
+                    System.exit(0); // termina le ejecucion
                     break;
                     
                 case "Square":
@@ -86,11 +94,26 @@ public class Game_Controller extends JFrame
                     break;
                     
                 case "Menu":
-                    System.out.println("Menu");
+                    setActualView( game_model.getMain_menu() );
                     break; 
             } // fin del switch
         } // fin de actionPerformed   
     } // fin de ButonAdaparte
+
+    
+    /**
+     * Establece la vista actual
+     * @param view vista a ser establecido
+     */
+    public void setActualView(JPanel view) 
+    {
+        this.getContentPane().remove( this.actualView ); // remuevo vista actual
+        this.actualView = view; // obtengo nuevo vista
+        this.getContentPane().add( this.actualView ); // establezco nueva vista
+        this.invalidate(); 
+        this.validate();
+        this.getContentPane().repaint(); // repinta el tablero
+    } // fin de setActualView
     
     
     /**
