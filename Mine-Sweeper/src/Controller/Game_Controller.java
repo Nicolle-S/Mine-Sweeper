@@ -88,6 +88,11 @@ public class Game_Controller extends JFrame
                     
                 case "Square":
                     game_model.load_Board_Controller( Board_Model.SQUARE );
+                    setSize(
+                            game_model.getBoard_controller().getBoard_model().getBoard_view().getWidth(),
+                            game_model.getBoard_controller().getBoard_model().getBoard_view().getHeight() + 29);
+                    setActualView( game_model.getBoard_controller().getBoard_model().getBoard_view() );
+                    
                     break;
                     
                 case "Hexagon":

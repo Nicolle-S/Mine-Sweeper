@@ -17,7 +17,7 @@ import Model.Square;
  */
 public class Board_Controller 
 {
-    Board_Model board_model; // modelo del mineswipper
+    private Board_Model board_model; // modelo del mineswipper
 
     
     
@@ -32,6 +32,19 @@ public class Board_Controller
             this.board_model = new Hexagon();
         }
     } // fin de Board_Controller
+
+    
+    /**
+     * Retorna el board_model
+     * @return board_model
+     */
+    public Board_Model getBoard_model() 
+    {
+        return board_model;
+    }
+    
+    
+    
     
     
     

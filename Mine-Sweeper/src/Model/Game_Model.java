@@ -15,6 +15,8 @@ import View.Game_View_Menu2;
  */
 public class Game_Model 
 {
+    public enum Difficulty{ EASY, MEDIUM, HARD } // define las dificultades del juego
+    public static Difficulty difficulty; // dificultad del juego
     public static final int WIDTH = 300;
     public static final int HEIGHT = 400;
     private Game_View_Menu1 main_menu;
@@ -36,6 +38,17 @@ public class Game_Model
     {
         this.board_controller = new Board_Controller( modoJuego );
     }
+
+    /**
+     * Retorna el board_controller
+     * @return board_controller
+     */
+    public Board_Controller getBoard_controller() 
+    {
+        return board_controller;
+    }
+    
+    
 
     
     /**
