@@ -128,57 +128,88 @@ public class Hexagon extends Board_Model{
         table[i][j] -= COVER_FOR_CELL;
             
         /**
-         * verifico si la celda de encima no contiene mina
+         * verifico si la celda de encima esta vacia
          */
-        if( (i - 1) >= 0 && table[i-1][j] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (i - 1) >= 0 && table[i-1][j] == COVER_FOR_CELL ){
            
             search_campEmpty(i-1, j); 
         }
         
+        else if( (i - 1) >= 0 && table[i-1][j] > COVER_FOR_CELL && table[i-1][j] < COVERED_MINE_CELL){
+            
+            table[i-1][j] -= COVER_FOR_CELL;
+           
+        }
+        
         /**
-         * verifico si la celda de abajo no contiene mina
+         * verifico si la celda de abajo esta vacia
          */
-        if( (i + 1) < N_ROWS && table[i+1][j] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (i + 1) < N_ROWS && table[i+1][j] == COVER_FOR_CELL ){
            
             search_campEmpty(i+1, j);    
         }
         
+        else if((i + 1) < N_ROWS && table[i+1][j] > COVER_FOR_CELL && table[i+1][j] < COVERED_MINE_CELL ){
+            
+            table[i+1][j] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda izquierda no contiene mina
+         * verifico si la celda izquierda esta vacia
          */
-        if( (j - 1) >= 0 && table[i][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (j - 1) >= 0 && table[i][j-1] == COVER_FOR_CELL ){
             
             search_campEmpty(i, j-1);
         }
         
+        else if((j - 1) >= 0 && table[i][j-1] > COVER_FOR_CELL && table[i][j-1] < COVERED_MINE_CELL ){
+            
+            table[i][j-1] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda derecha no contiene mina
+         * verifico si la celda derecha esta vacia
          */
-        if( (j + 1) < N_COLS && table[i][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (j + 1) < N_COLS && table[i][j+1] == COVER_FOR_CELL){
             
             search_campEmpty(i, j+1);
+        }
+        
+        else if((j + 1) < N_COLS && table[i][j+1] > COVER_FOR_CELL && table[i][j+1] < COVERED_MINE_CELL){
+            
+            table[i][j+1] -= COVER_FOR_CELL;
         }
         
         /**
         * si estoy en una fila IMPAR debo buscar solo en las diagonales derechas
         */
         if( (i % 2) != 0){
-            
+           
             /**
-             * verifico si la celda superior diagonal derecha no contiene mina
-             */
-            if( (j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+            * verifico si la celda superior diagonal derecha esta vacia
+            */
+            if( (j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] == COVER_FOR_CELL ){
 
-                search_campEmpty(i-1, j+1);   
+               search_campEmpty(i-1, j+1);   
             }
-            
+
+            else if((j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] > COVER_FOR_CELL && table[i-1][j+1] < COVERED_MINE_CELL){
+
+               table[i-1][j+1] -= COVER_FOR_CELL;
+            }
+
             /**
-             * verifico si la celda inferior diagonal derecha no contiene mina
+             * verifico si la celda inferior diagonal derecha esta vacia
              */
-            if( (j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+            if( (j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] == COVER_FOR_CELL){
 
-                search_campEmpty(i+1, j+1);
+               search_campEmpty(i+1, j+1);
 
+            }
+
+            else if((j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] > COVER_FOR_CELL && table[i+1][j+1] < COVERED_MINE_CELL){
+
+               table[i+1][j+1] -= COVER_FOR_CELL;
             }       
         }
         
@@ -188,20 +219,30 @@ public class Hexagon extends Board_Model{
         else{
             
             /**
-             * verifico si la celda superior diagonal izquierda no contiene mina
+             * verifico si la celda superior diagonal izquierda esta vacia
              */
-            if( (j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+            if( (j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] == COVER_FOR_CELL ){
 
                 search_campEmpty(i-1, j-1);    
             }
+
+            else if((j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] > COVER_FOR_CELL && table[i-1][j-1] < COVERED_MINE_CELL){
+
+                table[i-1][j-1] -= COVER_FOR_CELL;
+            }
             
             /**
-             * verifico si la celda inferior diagonal izquierda no contiene mina
+             * verifico si la celda inferior diagonal izquierda esta vacia
              */
-            if( (j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+            if( (j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] == COVER_FOR_CELL ){
 
                 search_campEmpty(i+1, j-1);    
-            }     
+            }
+
+            else if((j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] > COVER_FOR_CELL && table[i+1][j-1] < COVERED_MINE_CELL){
+
+                table[i+1][j-1] -= COVER_FOR_CELL;
+            }
         }
     }
     

@@ -118,68 +118,109 @@ public class Square extends Board_Model{
          
          
         /**
-         * verifico si la celda de encima no contiene mina
+         * verifico si la celda de encima esta vacia
          */
-        if( (i - 1) >= 0 && table[i-1][j] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (i - 1) >= 0 && table[i-1][j] == COVER_FOR_CELL ){
            
             search_campEmpty(i-1, j); 
         }
         
+        else if( (i - 1) >= 0 && table[i-1][j] > COVER_FOR_CELL && table[i-1][j] < COVERED_MINE_CELL){
+            
+            table[i-1][j] -= COVER_FOR_CELL;
+           
+        }
+        
         /**
-         * verifico si la celda de abajo no contiene mina
+         * verifico si la celda de abajo esta vacia
          */
-        if( (i + 1) < N_ROWS && table[i+1][j] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL  ){
+        if( (i + 1) < N_ROWS && table[i+1][j] == COVER_FOR_CELL ){
            
             search_campEmpty(i+1, j);    
         }
         
+        else if((i + 1) < N_ROWS && table[i+1][j] > COVER_FOR_CELL && table[i+1][j] < COVERED_MINE_CELL ){
+            
+            table[i+1][j] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda izquierda no contiene mina
+         * verifico si la celda izquierda esta vacia
          */
-        if( (j - 1) >= 0 && table[i][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL  ){
+        if( (j - 1) >= 0 && table[i][j-1] == COVER_FOR_CELL ){
             
             search_campEmpty(i, j-1);
         }
         
+        else if((j - 1) >= 0 && table[i][j-1] > COVER_FOR_CELL && table[i][j-1] < COVERED_MINE_CELL ){
+            
+            table[i][j-1] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda derecha no contiene mina
+         * verifico si la celda derecha esta vacia
          */
-        if( (j + 1) < N_COLS && table[i][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL  ){
+        if( (j + 1) < N_COLS && table[i][j+1] == COVER_FOR_CELL){
             
             search_campEmpty(i, j+1);
         }
         
+        else if((j + 1) < N_COLS && table[i][j+1] > COVER_FOR_CELL && table[i][j+1] < COVERED_MINE_CELL){
+            
+            table[i][j+1] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda superior diagonal izquierda no contiene mina
+         * verifico si la celda superior diagonal izquierda esta vacia
          */
-        if( (j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL  ){
+        if( (j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] == COVER_FOR_CELL ){
             
             search_campEmpty(i-1, j-1);    
         }
         
+        else if((j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] > COVER_FOR_CELL && table[i-1][j-1] < COVERED_MINE_CELL){
+            
+            table[i-1][j-1] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda superior diagonal derecha no contiene mina
+         * verifico si la celda superior diagonal derecha esta vacia
          */
-        if( (j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL  ){
+        if( (j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] == COVER_FOR_CELL ){
             
             search_campEmpty(i-1, j+1);   
         }
         
+        else if((j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] > COVER_FOR_CELL && table[i-1][j+1] < COVERED_MINE_CELL){
+            
+            table[i-1][j+1] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda inferior diagonal izquierda no contiene mina
+         * verifico si la celda inferior diagonal izquierda esta vacia
          */
-        if( (j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] == COVER_FOR_CELL ){
             
             search_campEmpty(i+1, j-1);    
         }
         
+        else if((j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] > COVER_FOR_CELL && table[i+1][j-1] < COVERED_MINE_CELL){
+            
+            table[i+1][j-1] -= COVER_FOR_CELL;
+        }
+        
         /**
-         * verifico si la celda inferior diagonal derecha no contiene mina
+         * verifico si la celda inferior diagonal derecha esta vacia
          */
-        if( (j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
+        if( (j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] == COVER_FOR_CELL){
             
             search_campEmpty(i+1, j+1);
        
+        }
+        
+        else if((j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] > COVER_FOR_CELL && table[i+1][j+1] < COVERED_MINE_CELL){
+            
+            table[i+1][j+1] -= COVER_FOR_CELL;
         }
     }
     

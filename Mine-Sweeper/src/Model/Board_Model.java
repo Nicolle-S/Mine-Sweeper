@@ -19,11 +19,11 @@ public abstract class Board_Model
     private Board_View board_view; // vista del juego
     public static final int SQUARE = 1; // define el juego tradicional
     public static final int HEXAGON = 2; // define el juego hexagon
-    protected final int COVER_FOR_CELL; // celda cubierta
+    protected final int COVER_FOR_CELL; // celda cubierta y vacia
     private final int MARK_FOR_CELL; // celda marcada
     protected final int EMPTY_CELL; // celda vacia
     protected final int MINE_CELL; // celda con una mina
-    private final int COVERED_MINE_CELL; // celda cubierta con una mina
+    protected final int COVERED_MINE_CELL; // celda cubierta con una mina
     //private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
 
     private final int N_MINES; // numero de minas
