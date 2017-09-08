@@ -23,7 +23,7 @@ public abstract class Board_Model
     private final int MARK_FOR_CELL; // celda marcada
     protected final int EMPTY_CELL; // celda vacia
     protected final int MINE_CELL; // celda con una mina
-    //private final int COVERED_MINE_CELL; // celda cubierta con una mina
+    private final int COVERED_MINE_CELL; // celda cubierta con una mina
     //private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
 
     private final int N_MINES; // numero de minas
@@ -41,7 +41,7 @@ public abstract class Board_Model
         MARK_FOR_CELL = 10; 
         EMPTY_CELL = 0; 
         MINE_CELL = 9; 
-        //COVERED_MINE_CELL = MINE_CELL + COVER_FOR_CELL;
+        COVERED_MINE_CELL = MINE_CELL + COVER_FOR_CELL;
         //MARKED_MINE_CELL = COVERED_MINE_CELL + MARK_FOR_CELL;
 
         N_MINES = 40; 

@@ -125,36 +125,36 @@ public class Hexagon extends Board_Model{
         /**
          * primero que nada destapo la celda en la que estoy ubicada
          */
-        //table[i][j] -= COVER_FOR_CELL;
-             table[i][j] = 50;
+        table[i][j] -= COVER_FOR_CELL;
+            
         /**
-         * verifico si la celda de encima esta vacia
+         * verifico si la celda de encima no contiene mina
          */
-        if( (i - 1) >= 0 && table[i-1][j] == COVER_FOR_CELL ){
+        if( (i - 1) >= 0 && table[i-1][j] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
            
             search_campEmpty(i-1, j); 
         }
         
         /**
-         * verifico si la celda de abajo esta vacia
+         * verifico si la celda de abajo no contiene mina
          */
-        if( (i + 1) < N_ROWS && table[i+1][j] == COVER_FOR_CELL ){
+        if( (i + 1) < N_ROWS && table[i+1][j] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
            
             search_campEmpty(i+1, j);    
         }
         
         /**
-         * verifico si la celda izquierda esta vacia
+         * verifico si la celda izquierda no contiene mina
          */
-        if( (j - 1) >= 0 && table[i][j-1] == COVER_FOR_CELL ){
+        if( (j - 1) >= 0 && table[i][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
             
             search_campEmpty(i, j-1);
         }
         
         /**
-         * verifico si la celda derecha esta vacia
+         * verifico si la celda derecha no contiene mina
          */
-        if( (j + 1) < N_COLS && table[i][j+1] == COVER_FOR_CELL ){
+        if( (j + 1) < N_COLS && table[i][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
             
             search_campEmpty(i, j+1);
         }
@@ -165,17 +165,17 @@ public class Hexagon extends Board_Model{
         if( (i % 2) != 0){
             
             /**
-             * verifico si la celda superior diagonal derecha esta vacia
+             * verifico si la celda superior diagonal derecha no contiene mina
              */
-            if( (j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] == COVER_FOR_CELL ){
+            if( (j + 1) < N_COLS && (i - 1) >= 0 && table[i-1][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
 
                 search_campEmpty(i-1, j+1);   
             }
             
             /**
-             * verifico si la celda inferior diagonal derecha esta vacia
+             * verifico si la celda inferior diagonal derecha no contiene mina
              */
-            if( (j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] == COVER_FOR_CELL ){
+            if( (j + 1) < N_COLS && (i + 1) < N_ROWS && table[i+1][j+1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
 
                 search_campEmpty(i+1, j+1);
 
@@ -188,17 +188,17 @@ public class Hexagon extends Board_Model{
         else{
             
             /**
-             * verifico si la celda superior diagonal izquierda esta vacia
+             * verifico si la celda superior diagonal izquierda no contiene mina
              */
-            if( (j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] == COVER_FOR_CELL ){
+            if( (j - 1) >= 0 && (i - 1) >= 0 && table[i-1][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
 
                 search_campEmpty(i-1, j-1);    
             }
             
             /**
-             * verifico si la celda inferior diagonal izquierda esta vacia
+             * verifico si la celda inferior diagonal izquierda no contiene mina
              */
-            if( (j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] == COVER_FOR_CELL ){
+            if( (j - 1) >= 0 && (i + 1) < N_ROWS && table[i+1][j-1] >= COVER_FOR_CELL && table[i-1][j] < MINE_CELL ){
 
                 search_campEmpty(i+1, j-1);    
             }     
