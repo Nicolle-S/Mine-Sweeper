@@ -40,6 +40,11 @@ public class Game_View_Menu2 extends javax.swing.JPanel {
 
         square.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         square.setText("Square");
+        square.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                squareMouseClicked(evt);
+            }
+        });
 
         hexagon.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         hexagon.setText("Hexagon");
@@ -78,6 +83,10 @@ public class Game_View_Menu2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void squareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_squareMouseClicked
+      
+    }//GEN-LAST:event_squareMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton hexagon;
@@ -109,6 +118,7 @@ public class Game_View_Menu2 extends javax.swing.JPanel {
      * @return boton del modo tradicional
      */
     public JButton getSquare() {
+       
         return square;
     }
 } // fin de Game_View_Menu2

@@ -45,12 +45,25 @@ public abstract class Board_Model
         //MARKED_MINE_CELL = COVERED_MINE_CELL + MARK_FOR_CELL;
 
         N_MINES = 40; 
-        N_ROWS = 16; 
-        N_COLS = 16; 
+        N_ROWS = 20; 
+        N_COLS = 20; 
         
         table = new int [N_ROWS][N_COLS];
         this.load_Board();
     }
+
+    public int getN_ROWS() {
+        return N_ROWS;
+    }
+
+    public int getN_COLS() {
+        return N_COLS;
+    }
+
+    public int[][] getTable() {
+        return table;
+    }
+    
     
     
     protected void load_Board_View()
