@@ -44,7 +44,7 @@ public abstract class Board_Model
         COVERED_MINE_CELL = MINE_CELL + COVER_FOR_CELL;
         //MARKED_MINE_CELL = COVERED_MINE_CELL + MARK_FOR_CELL;
 
-        N_MINES = 40; 
+        N_MINES = 8; 
         N_ROWS = 8; 
         N_COLS = 8; 
         
@@ -67,10 +67,10 @@ public abstract class Board_Model
     public Board_View getBoard_view() {
         return board_view;
     }
-    
-    
-    
-    
+
+    public int getCOVER_FOR_CELL() {
+        return COVER_FOR_CELL;
+    }
     
     protected void load_Board_View()
     {
@@ -136,6 +136,28 @@ public abstract class Board_Model
                 table[i][j] += COVER_FOR_CELL;
             }   
         }  
+    }
+    
+    public void discover_cell(int i, int j){
+        
+        table[i][j] -= COVER_FOR_CELL;
+        
+    }
+    
+    public void Mark_cell(int i, int j){
+        
+        /**
+         * La celda ya esta marcada, entonces la desmarco
+         */
+        if( table[i][j] >= 20)
+            table[i][j] -= MARK_FOR_CELL; 
+        
+        /**
+         * de otro modo la marco
+         */
+        else
+            table[i][j] += MARK_FOR_CELL;
+   
     }
    
     

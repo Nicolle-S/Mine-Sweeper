@@ -43,6 +43,12 @@ public class Board_View extends JPanel{
         this.setSize(SIZE_IMAGEN*tab.getN_COLS(),SIZE_IMAGEN*tab.getN_ROWS());
         this.setVisible(true);            
     }
+
+    public JButton[][] getTableB() {
+        return tableB;
+    }
+    
+    
     
     
     /**
@@ -94,7 +100,12 @@ public class Board_View extends JPanel{
                 if(tab.getTable()[i][j] >= 20){
                     
                     tableB[i][j].setIcon(Im[10]);
-                }   
+                }
+                
+                if(tab.getTable()[i][j] >=11 && tab.getTable()[i][j] <= 19){
+                    
+                    tableB[i][j].setIcon(null);
+                }
             }   
         }
     } 
