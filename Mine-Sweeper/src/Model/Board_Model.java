@@ -5,6 +5,7 @@
  */
 package Model;
 
+import View.Board_View;
 import java.util.Random;
 
 /**
@@ -13,8 +14,11 @@ import java.util.Random;
  * debe tener el tablero de juego, el cual consta de una matriz numerica.
  * A su vez posee dos subclases que definen el diseno del tablero que se jugara
  */
-public abstract class Board_Model {
-    
+public abstract class Board_Model 
+{
+    private Board_View board_view; // vista del juego
+    public static final int SQUARE = 1; // define el juego tradicional
+    public static final int HEXAGON = 2; // define el juego hexagon
     protected final int COVER_FOR_CELL; // celda cubierta
     private final int MARK_FOR_CELL; // celda marcada
     protected final int EMPTY_CELL; // celda vacia
@@ -44,14 +48,21 @@ public abstract class Board_Model {
         N_ROWS = 16; 
         N_COLS = 16; 
         
-        table= new int [N_ROWS][N_COLS];
+        table = new int [N_ROWS][N_COLS];
+        this.load_Board();
+    }
+    
+    
+    protected void load_Board_View()
+    {
+        board_view = new Board_View( this );
     }
     
     
     /**
      * Metodo encargado de cargar la matriz con las minas, las celdas vacias y los valores adyacentes de cada casilla.
      */
-    public void load_Board(){
+    private void load_Board(){
         
         Random a = new Random();
         int X, Y, mines = 0;
@@ -97,7 +108,7 @@ public abstract class Board_Model {
     /**
      * Cubro de manera logica el valor de todas las casillas de la matriz
      */
-    public void cover_all_cell(){
+    protected void cover_all_cell(){
         
         for (int i = 0; i < N_ROWS; i++) {
             
@@ -112,7 +123,7 @@ public abstract class Board_Model {
     /**
      * establezco los valores de la cantidad de minas que posee una celda en particular
      */
-    abstract public void Load_adjacent();
+    abstract protected void Load_adjacent();
     
     
     /**

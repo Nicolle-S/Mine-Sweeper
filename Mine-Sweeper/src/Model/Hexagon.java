@@ -11,14 +11,19 @@ package Model;
  */
 public class Hexagon extends Board_Model{
 
-    public Hexagon() {
+    public Hexagon() 
+    {
+        super();
+        this.Load_adjacent();
+        super.cover_all_cell();
+        super.load_Board_View();
     }
 
     /**
      * establezco los valores de la cantidad de minas que posee una celda en particular
      */
     @Override
-    public void Load_adjacent() {
+    protected void Load_adjacent() {
         
         for (int i = 0; i < N_ROWS; i++) {
             

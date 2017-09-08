@@ -30,6 +30,12 @@ public class Game_Model
         this.main_menu = new Game_View_Menu1();
         this.mines_menu = new Game_View_Menu2();
     } // fin del Game_Model
+    
+    
+    public void load_Board_Controller( int modoJuego )
+    {
+        this.board_controller = new Board_Controller( modoJuego );
+    }
 
     
     /**

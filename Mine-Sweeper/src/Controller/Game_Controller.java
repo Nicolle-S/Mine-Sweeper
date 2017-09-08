@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.Board_Model;
 import Model.Game_Model;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,11 +87,11 @@ public class Game_Controller extends JFrame
                     break;
                     
                 case "Square":
-                    System.out.println("Square");
+                    game_model.load_Board_Controller( Board_Model.SQUARE );
                     break;
                     
                 case "Hexagon":
-                    System.out.println("Hexagon");
+                    game_model.load_Board_Controller( Board_Model.HEXAGON );
                     break;
                     
                 case "Menu":

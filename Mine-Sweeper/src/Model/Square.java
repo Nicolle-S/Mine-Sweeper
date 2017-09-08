@@ -12,7 +12,12 @@ package Model;
  */
 public class Square extends Board_Model{
 
-    public Square() {
+    public Square() 
+    {
+        super();
+        this.Load_adjacent();
+        super.cover_all_cell();
+        super.load_Board_View();
     }
     
     /**
