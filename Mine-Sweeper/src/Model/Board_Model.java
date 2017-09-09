@@ -6,7 +6,10 @@
 package Model;
 
 import View.Board_View;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
+import javax.swing.Timer;
 
 /**
  *
@@ -26,17 +29,19 @@ public abstract class Board_Model
     protected final int COVERED_MINE_CELL; // celda cubierta con una mina
     //private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
     public static final int size_component = 50; // tamano de los elemtos de la GUI del tablero
-    private final int N_MINES; // numero de minas
+    protected final int N_MINES; // numero de minas
     protected final int N_ROWS; // filas
     protected final int N_COLS; // columnas
     protected int[][] table;
+    private final Timer chrono; // revisa el cronometro
+    public static boolean startGame; // determina si el juego ya se inicio
    
     
     /** 
      * Inicializa el modelo del tablero, dando los valores iniciales
      */
     public Board_Model(){
-        
+        Board_Model.startGame = false;
         COVER_FOR_CELL = 10; 
         MARK_FOR_CELL = 10; 
         EMPTY_CELL = 0; 
@@ -67,7 +72,23 @@ public abstract class Board_Model
         
         table = new int [N_ROWS][N_COLS];
         this.load_Board();
+        
+        
+        this.chrono = new Timer( 1000, new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+                int act_time = Integer.parseInt( board_view.getTime().getText() );
+                board_view.setTime(++act_time);
+            }
+        });
     }
+
+    public int getN_MINES() {
+        return N_MINES;
+    }
+    
 
     public int getN_ROWS() {
         return N_ROWS;
@@ -88,6 +109,12 @@ public abstract class Board_Model
     public int getCOVER_FOR_CELL() {
         return COVER_FOR_CELL;
     }
+
+    public Timer getChrono() {
+        return chrono;
+    }
+    
+    
     
     protected void load_Board_View()
     {
@@ -155,25 +182,44 @@ public abstract class Board_Model
         }  
     }
     
-    public void discover_cell(int i, int j){
+    public void discover_cell(int i, int j)
+    {
+        int nro_marks; // numero de marcas actuales
+        nro_marks = Integer.parseInt( this.board_view.getMarks().getText() );
+        
+        
+        // si la celda esta marcada
+        if( table[i][j] >= 20 )
+        {
+            this.board_view.setMarks(++nro_marks);
+        }
         
         table[i][j] -= COVER_FOR_CELL;
         
     }
     
-    public void Mark_cell(int i, int j){
+    public void Mark_cell(int i, int j)
+    {
+        int nro_marks; // numero de marcas actuales
+        nro_marks = Integer.parseInt( this.board_view.getMarks().getText() );
         
         /**
          * La celda ya esta marcada, entonces la desmarco
          */
         if( table[i][j] >= 20)
-            table[i][j] -= MARK_FOR_CELL; 
+        {
+            table[i][j] -= MARK_FOR_CELL;
+            this.board_view.setMarks(++nro_marks);
+        }
         
         /**
          * de otro modo la marco
          */
         else
+        {
             table[i][j] += MARK_FOR_CELL;
+            this.board_view.setMarks(--nro_marks);
+        }
    
     }
    

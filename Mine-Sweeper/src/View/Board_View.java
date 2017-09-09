@@ -80,19 +80,21 @@ public class Board_View extends JPanel{
         Font labels =  new Font("Stencil", Font.BOLD, 36 ); // fuente para labels
         
         // intacio y doy propiedades al label de las marcas
-        this.marks = new JLabel("10"); // se debe modificar el por el numero de minas
-        this.marks.setBounds( 0, 0, Board_Model.size_component, Board_Model.size_component);
-        this.marks.setAlignmentX( JLabel.CENTER_ALIGNMENT );
-        this.marks.setAlignmentY( JLabel.CENTER_ALIGNMENT );
+        this.marks = new JLabel(); // se debe modificar el por el numero de minas
+        this.setMarks( tab.getN_MINES() );
+        this.marks.setBounds( 0, 0, Board_Model.size_component * 2, Board_Model.size_component);
+        this.marks.setHorizontalAlignment( JLabel.CENTER );
+        this.marks.setVerticalAlignment( JLabel.CENTER );
         this.marks.setFont( labels );
         this.marks.setForeground(Color.red);
         
         // intacio y doy propiedades al label del tiempo
-        this.time = new JLabel("00"); // se debe modificar el por el numero de minas
-        this.time.setBounds( this.board_view_container.getWidth() - Board_Model.size_component, 0,
-                Board_Model.size_component, Board_Model.size_component);
-        this.time.setAlignmentX( JLabel.CENTER_ALIGNMENT );
-        this.time.setAlignmentY( JLabel.CENTER_ALIGNMENT );
+        this.time = new JLabel(); // se debe modificar el por el numero de minas
+        this.setTime( 0 );
+        this.time.setBounds( this.board_view_container.getWidth() - Board_Model.size_component * 2, 0,
+                Board_Model.size_component * 2, Board_Model.size_component);
+        this.time.setHorizontalAlignment( JLabel.CENTER );
+        this.time.setVerticalAlignment( JLabel.CENTER );
         this.time.setFont( labels );
         this.time.setForeground(Color.red);
         
@@ -159,6 +161,20 @@ public class Board_View extends JPanel{
     public JButton getExit() {
         return exit;
     }
+
+    public void setMarks( int marks ) 
+    {
+        this.marks.setText( (marks < 10 && marks >= 0 ? "0" + String.valueOf( marks ) : String.valueOf( marks ) ) );
+    }
+
+    public void setTime( int t ) {
+        this.time.setText( ( t < 10 ? "0" + String.valueOf( t ) : String.valueOf( t ) ) );
+    }
+    
+    
+    
+    
+    
       
     
     /**
@@ -214,7 +230,7 @@ public class Board_View extends JPanel{
                     tableB[i][j].setIcon(Im[10]);
                 }
                 
-                if(tab.getTable()[i][j] >=11 && tab.getTable()[i][j] <= 19){
+                if(tab.getTable()[i][j] >=10 && tab.getTable()[i][j] <= 19){
                     
                     tableB[i][j].setIcon(null);
                 }
