@@ -88,7 +88,8 @@ public class Board_View extends JPanel{
     
     private void initialize_components()
     {
-        Font labels =  new Font("Stencil", Font.BOLD, 36 ); // fuente para labels
+        Font labels =  new Font("Castellar", Font.BOLD, 36 ); // fuente para labels
+        Color labels_color = new Color(160, 5, 9);
         
         // intacio y doy propiedades al label de las marcas
         this.marks = new JLabel(); // se debe modificar el por el numero de minas
@@ -97,7 +98,9 @@ public class Board_View extends JPanel{
         this.marks.setHorizontalAlignment( JLabel.CENTER );
         this.marks.setVerticalAlignment( JLabel.CENTER );
         this.marks.setFont( labels );
-        this.marks.setForeground(Color.red);
+        this.marks.setForeground( labels_color );
+        this.marks.setBackground( Color.BLACK );
+        this.marks.setOpaque(true);
         
         // intacio y doy propiedades al label del tiempo
         this.time = new JLabel(); // se debe modificar el por el numero de minas
@@ -107,7 +110,9 @@ public class Board_View extends JPanel{
         this.time.setHorizontalAlignment( JLabel.CENTER );
         this.time.setVerticalAlignment( JLabel.CENTER );
         this.time.setFont( labels );
-        this.time.setForeground(Color.red);
+        this.time.setForeground( labels_color );
+        this.time.setBackground( Color.BLACK );
+        this.time.setOpaque(true);
         
         // instacio y doy propidades al boton de reiniciar
         this.restar = new JButton("Restar"); // falta colocar el icono de la carita al boton
@@ -210,7 +215,8 @@ public class Board_View extends JPanel{
     /**
      * Da memoria, posicion y tamano a cada boton del tablero de juego.
      */
-    private void Initialize_TableB(){
+    private void Initialize_TableB()
+    {
         
         for (int i = 0; i < tab.getN_ROWS(); i++) {
             
@@ -224,6 +230,9 @@ public class Board_View extends JPanel{
                 }
                 else
                 {
+                    
+                    tableB[i][j].setBackground( new Color(71, 70, 48));
+                    
                     // para las filas impares
                     if( i % 2 != 0 )
                         tableB[i][j].setBounds(SIZE_IMAGEN*j + 17,SIZE_IMAGEN*i,SIZE_IMAGEN,SIZE_IMAGEN);
