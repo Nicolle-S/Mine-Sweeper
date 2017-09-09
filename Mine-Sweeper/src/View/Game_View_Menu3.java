@@ -11,12 +11,12 @@ import javax.swing.JButton;
  *
  * @author DilanU
  */
-public class Game_view_Menu3 extends javax.swing.JPanel {
+public class Game_View_Menu3 extends javax.swing.JPanel {
 
     /**
      * Creates new form Game_view_Menu3
      */
-    public Game_view_Menu3() {
+    public Game_View_Menu3() {
         initComponents();
     }
 

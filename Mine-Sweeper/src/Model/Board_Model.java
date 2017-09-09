@@ -25,7 +25,7 @@ public abstract class Board_Model
     protected final int MINE_CELL; // celda con una mina
     protected final int COVERED_MINE_CELL; // celda cubierta con una mina
     //private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
-
+    public static final int size_component = 50; // tamano de los elemtos de la GUI del tablero
     private final int N_MINES; // numero de minas
     protected final int N_ROWS; // filas
     protected final int N_COLS; // columnas
@@ -33,7 +33,7 @@ public abstract class Board_Model
    
     
     /** 
-     * Constructor de la Clase. 
+     * Inicializa el modelo del tablero, dando los valores iniciales
      */
     public Board_Model(){
         
@@ -44,9 +44,26 @@ public abstract class Board_Model
         COVERED_MINE_CELL = MINE_CELL + COVER_FOR_CELL;
         //MARKED_MINE_CELL = COVERED_MINE_CELL + MARK_FOR_CELL;
 
-        N_MINES = 8; 
-        N_ROWS = 8; 
-        N_COLS = 8; 
+
+        
+        if( Game_Model.difficulty != Game_Model.Difficulty.EASY )
+            if( Game_Model.difficulty == Game_Model.Difficulty.MEDIUM )
+            {
+                N_MINES = 40; 
+                N_ROWS = 15;
+                N_COLS = 15;
+            }
+            else
+            {
+                N_MINES = 82;
+                N_ROWS = 15;
+                N_COLS = 25;
+            }
+        else {
+            N_MINES = 9;
+            N_ROWS = 8;
+            N_COLS = 8;
+        }
         
         table = new int [N_ROWS][N_COLS];
         this.load_Board();

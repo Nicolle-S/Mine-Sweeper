@@ -8,11 +8,8 @@ package Controller;
 import Model.Board_Model;
 import Model.Hexagon;
 import Model.Square;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Representa el controlador del para el juego mineswipper.
@@ -22,10 +19,13 @@ import java.awt.event.MouseListener;
  */
 public class Board_Controller 
 {
-    private Board_Model board_model; // modelo del mineswipper
+    private final Board_Model board_model; // modelo del mineswipper
 
     
-    
+    /**
+     * Instancia el modelo de juego de acuerdo al modo de juego elegido
+     * @param modoJuego 
+     */
     public Board_Controller( int modoJuego ) 
     {
         if( modoJuego == Board_Model.SQUARE )
@@ -38,8 +38,7 @@ public class Board_Controller
         }
         
         addEvente_Table();
-        
-    }
+    } // fin de Board_Controller
 
     
     /**
@@ -130,14 +129,6 @@ public class Board_Controller
                         
             }
         
-        }
-        
-        
-    }
-    
-    
-        
-    
-    
-    
-}
+        } 
+    } // fin de addEvent_Table 
+} // fin de Board_Controller

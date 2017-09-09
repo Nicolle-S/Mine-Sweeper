@@ -7,8 +7,11 @@ package Controller;
 
 import Model.Board_Model;
 import Model.Game_Model;
+import View.Board_View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -51,6 +54,9 @@ public class Game_Controller extends JFrame
         this.game_model.getMines_menu().getSquare().addActionListener(listener_button);
         this.game_model.getMines_menu().getHexagon().addActionListener(listener_button);
         this.game_model.getMines_menu().getMenu().addActionListener(listener_button);
+        this.game_model.getDifficulty_menu().getEasy().addActionListener(listener_button);
+        this.game_model.getDifficulty_menu().getMedium().addActionListener(listener_button);
+        this.game_model.getDifficulty_menu().getHard().addActionListener(listener_button);
     } // fin de Game_Controller
     
     
@@ -87,24 +93,75 @@ public class Game_Controller extends JFrame
                     break;
                     
                 case "Square":
-                    game_model.load_Board_Controller( Board_Model.SQUARE );
-                    setSize(
-                            game_model.getBoard_controller().getBoard_model().getBoard_view().getWidth(),
-                            game_model.getBoard_controller().getBoard_model().getBoard_view().getHeight() + 29);
-                    setActualView( game_model.getBoard_controller().getBoard_model().getBoard_view() );
-                    
+                    Game_Model.game_mode = Game_Model.Game_Mode.SQUARE;
+                    setActualView( game_model.getDifficulty_menu() );                    
                     break;
                     
                 case "Hexagon":
-                    game_model.load_Board_Controller( Board_Model.HEXAGON );
+                    Game_Model.game_mode = Game_Model.Game_Mode.HEXAGON;
+                    setActualView( game_model.getDifficulty_menu() );
                     break;
                     
                 case "Menu":
+                    setSize( Game_Model.WIDTH, Game_Model.HEIGHT);
                     setActualView( game_model.getMain_menu() );
-                    break; 
+                    break;
+                    
+                case "Easy":
+                    Game_Model.difficulty = Game_Model.Difficulty.EASY;
+                    startGame();
+                    break;
+
+                case "Medium":
+                    Game_Model.difficulty = Game_Model.Difficulty.MEDIUM;
+                    startGame();
+                    break;
+
+                case "Hard":
+                    Game_Model.difficulty = Game_Model.Difficulty.HARD;
+                    startGame();
+                    break;
+                    
+                case "Restar":
+                    startGame();
+                    break;
             } // fin del switch
         } // fin de actionPerformed   
     } // fin de ButonAdaparte
+    
+    
+    /**
+     * inicia un nuevo juego, estableciendo la vista del juego
+     */
+    private void startGame()
+    {
+        // instacio en modo de juego elegido
+        if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE )
+        {
+            game_model.load_Board_Controller(Board_Model.SQUARE);
+        }
+        else
+        {
+            game_model.load_Board_Controller( Board_Model.HEXAGON );
+        }
+        
+        
+        // ajusto la ventana al modo de juego y la dificultad elejida
+        this.setSize(
+                game_model.getBoard_controller().getBoard_model().
+                        getBoard_view().getBoard_view_container().getWidth() + 6,
+                game_model.getBoard_controller().getBoard_model().
+                        getBoard_view().getBoard_view_container().getHeight() + 29);
+        this.setActualView(game_model.getBoard_controller().getBoard_model().
+                getBoard_view().getBoard_view_container());
+        
+        
+        // agrego eventos a los componentes del juego
+        Board_View view = this.game_model.getBoard_controller().getBoard_model().getBoard_view();
+        view.getRestar().addActionListener( this.listener_button );
+        view.getMenu().addActionListener( this.listener_button );
+        view.getExit().addActionListener( this.listener_button );
+    } // fin de startGame
 
     
     /**
