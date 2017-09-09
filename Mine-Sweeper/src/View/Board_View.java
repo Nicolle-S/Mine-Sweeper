@@ -6,6 +6,7 @@
 package View;
 
 import Model.Board_Model;
+import Model.Game_Model;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -54,9 +55,19 @@ public class Board_View extends JPanel{
         
        // da propiedades al tablero del juego
         this.setLayout(null);
-        this.setBounds( 0, Board_Model.size_component, 
-                SIZE_IMAGEN*tab.getN_COLS(),SIZE_IMAGEN*tab.getN_ROWS());
-        this.setVisible(true);      
+        
+        if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE )
+        {
+            this.setBounds( 0, Board_Model.size_component, 
+                    SIZE_IMAGEN*tab.getN_COLS(),SIZE_IMAGEN*tab.getN_ROWS());
+            this.setVisible(true);
+        }
+        else
+        {
+            this.setBounds( 0, Board_Model.size_component, 
+                    SIZE_IMAGEN*tab.getN_COLS() + 17,SIZE_IMAGEN*tab.getN_ROWS());
+            this.setVisible(true); 
+        }
         
         // inicio contenedor y componentes
         this.initialize_container();
@@ -172,11 +183,6 @@ public class Board_View extends JPanel{
     }
     
     
-    
-    
-    
-      
-    
     /**
      * Carga el vectos de imagenes con las imagenes necesarias para el tablero
      */
@@ -185,7 +191,15 @@ public class Board_View extends JPanel{
         try{
         for (int i = 0; i < Im.length; i++)
         {
-           Im[i]=new ImageIcon(getClass().getResource("/Images/"+i+".jpg"));       
+            if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE)
+            {
+                Im[i]=new ImageIcon(getClass().getResource("/Images/"+i+".jpg"));
+            }
+            else
+            {
+               Im[i]=new ImageIcon(getClass().getResource("/Images/"+i+"H.png"));
+            }
+                  
         }
         }catch(NullPointerException eex){
             System.out.println("Problema al cargar las imagenes");
@@ -203,7 +217,21 @@ public class Board_View extends JPanel{
             for (int j = 0; j < tab.getN_COLS(); j++) {
                 
                 tableB[i][j] = new JButton();
-                tableB[i][j].setBounds(SIZE_IMAGEN*j,SIZE_IMAGEN*i,SIZE_IMAGEN,SIZE_IMAGEN);
+                
+                if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE)
+                {
+                    tableB[i][j].setBounds(SIZE_IMAGEN*j,SIZE_IMAGEN*i,SIZE_IMAGEN,SIZE_IMAGEN);
+                }
+                else
+                {
+                    // para las filas impares
+                    if( i % 2 != 0 )
+                        tableB[i][j].setBounds(SIZE_IMAGEN*j + 17,SIZE_IMAGEN*i,SIZE_IMAGEN,SIZE_IMAGEN);
+                    else
+                        tableB[i][j].setBounds(SIZE_IMAGEN*j,SIZE_IMAGEN*i,SIZE_IMAGEN,SIZE_IMAGEN);
+                }
+                
+                
                 this.add(tableB[i][j]);   
             }   
         }
