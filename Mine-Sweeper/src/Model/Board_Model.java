@@ -19,6 +19,8 @@ import javax.swing.Timer;
  */
 public abstract class Board_Model 
 {
+    public enum StateGame{ WIN, GAME_OVER, PLAY } //determina el estado de juego
+    public static StateGame state; // estado del juego
     private Board_View board_view; // vista del juego
     public static final int SQUARE = 1; // define el juego tradicional
     public static final int HEXAGON = 2; // define el juego hexagon
@@ -42,6 +44,7 @@ public abstract class Board_Model
      */
     public Board_Model(){
         Board_Model.startGame = false;
+        Board_Model.state = StateGame.PLAY;
         COVER_FOR_CELL = 10; 
         MARK_FOR_CELL = 10; 
         EMPTY_CELL = 0; 

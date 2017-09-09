@@ -77,6 +77,11 @@ public class Board_Controller
                         super.mouseClicked(e);
                         
                         
+                        // si ya se acabo el juego
+                        if( Board_Model.state != Board_Model.StateGame.PLAY )
+                            return;
+                        
+                        
                         /**
                          * Verifico si el click presionado es el derecho, si es
                          * asi, quiere decir que marco la celda
