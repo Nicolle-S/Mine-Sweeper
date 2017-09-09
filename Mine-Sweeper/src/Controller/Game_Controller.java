@@ -35,10 +35,10 @@ public class Game_Controller extends JFrame
     {
         // inicializo valores de la ventana
         this.setResizable( false );
-        this.setLocationRelativeTo( null );
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.setTitle( "Mineswipper" );
         this.setSize( Game_Model.WIDTH, Game_Model.HEIGHT);
+        this.setLocationRelativeTo( null );
         
         this.game_model = new Game_Model(); // creo modelo
         this.actualView = this.game_model.getMain_menu(); // obtengo la vista
@@ -176,6 +176,7 @@ public class Game_Controller extends JFrame
         this.invalidate(); 
         this.validate();
         this.getContentPane().repaint(); // repinta el tablero
+        this.setLocationRelativeTo(null);
     } // fin de setActualView
     
     
