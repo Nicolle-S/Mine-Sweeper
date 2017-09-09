@@ -113,11 +113,7 @@ public class Board_Controller
                              */
                             if(board_model.getTable()[a][b] >= 10){
                                 
-                                if( !Board_Model.startGame ){
-                                    
-                                    Board_Model.startGame = true;
-                                    board_model.getChrono().start();
-                                }
+
                                 
                                 /**
                                  * Verifico si es una celda vacia, de ser asi, 

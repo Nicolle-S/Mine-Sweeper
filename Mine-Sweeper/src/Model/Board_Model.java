@@ -189,19 +189,24 @@ public abstract class Board_Model
     
     public void discover_cell(int i, int j)
     {
-        int nro_marks; // numero de marcas actuales
-        nro_marks = Integer.parseInt( this.board_view.getMarks().getText() );
-        
-        
-        // si la celda esta marcada
-        if( table[i][j] >= 20 )
+        // si la celda no esta marcada
+        if( table[i][j] < 20 )
         {
-            this.board_view.setMarks(++nro_marks);
+            table[i][j] -= COVER_FOR_CELL;
+            this.iniciarChrono();
         }
-        
-        table[i][j] -= COVER_FOR_CELL;
-        
     }
+    
+    public void iniciarChrono()
+    {    
+        // si no se ha iniciado el juego
+        if( !Board_Model.startGame ){
+
+            Board_Model.startGame = true;
+            this.getChrono().start();
+        } 
+    }
+    
     
     public void Mark_cell(int i, int j)
     {
@@ -269,11 +274,7 @@ public abstract class Board_Model
             this.chrono.stop();
             JOptionPane.showMessageDialog(null, "HAS GANADO");
             
-        }
-        
-        
-        
-        
+        } 
         
     }
    
