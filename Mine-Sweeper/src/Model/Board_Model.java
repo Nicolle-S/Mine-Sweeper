@@ -9,6 +9,7 @@ import View.Board_View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -43,6 +44,7 @@ public abstract class Board_Model
      * Inicializa el modelo del tablero, dando los valores iniciales
      */
     public Board_Model(){
+        
         Board_Model.startGame = false;
         Board_Model.state = StateGame.PLAY;
         COVER_FOR_CELL = 10; 
@@ -223,7 +225,56 @@ public abstract class Board_Model
             table[i][j] += MARK_FOR_CELL;
             this.board_view.setMarks(--nro_marks);
         }
-   
+    }
+    
+    public void checkGame(int i, int j){
+        
+        /**
+         * verifico si la celda que el jugador destapo es una mina
+         * si es asi, el juego termina inmediatamente
+         */
+        if(table[i][j] == MINE_CELL){
+            
+            Board_Model.state = StateGame.GAME_OVER;
+            this.chrono.stop();
+            JOptionPane.showMessageDialog(null, "HAS EXPLOTADO UNA MINA. PERDISTE");
+        }
+        
+        else{
+            
+            for (int k = 0; k < N_ROWS; k++) {
+                
+                for (int l = 0; l < N_COLS; l++) {
+                    
+                    /**
+                     * busco si queda alguna celda que tenga un valor de 10 a
+                     * 18, de ser asi quiere decir que aun quedan celdas que 
+                     * deben ser descubiertas puesto que no son minas
+                     */
+                    if(table[k][l] > MINE_CELL && table[k][l] < COVERED_MINE_CELL  )    
+                        return;
+                        
+                    
+                    
+                }
+                
+            }
+            
+            /**
+             * Si recorre toda la matriz y no consigue celdas por descubrir, 
+             * quiere decir que las unicas celdas que quedan cubiertas son las 
+             * celdas con minas, eso implica que el jugador ha ganado
+             */
+            Board_Model.state = StateGame.WIN;
+            this.chrono.stop();
+            JOptionPane.showMessageDialog(null, "HAS GANADO");
+            
+        }
+        
+        
+        
+        
+        
     }
    
     

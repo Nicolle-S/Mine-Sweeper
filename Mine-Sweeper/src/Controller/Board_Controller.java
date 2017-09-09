@@ -92,7 +92,8 @@ public class Board_Controller
                              * valido que solo pueda marcar una celda que aun no
                              * ha descubierto
                              */
-                            if(board_model.getTable()[a][b] >= 10 /*&& board_model.getTable()[a][b] < 20*/){
+                            if(board_model.getTable()[a][b] >= 10 ){
+                                
                                 board_model.Mark_cell(a, b);
                                 board_model.getBoard_view().paint_table(); //actualizo el tablero
                                 
@@ -111,8 +112,9 @@ public class Board_Controller
                              * cubiertas
                              */
                             if(board_model.getTable()[a][b] >= 10){
-                                if( !Board_Model.startGame )
-                                {
+                                
+                                if( !Board_Model.startGame ){
+                                    
                                     Board_Model.startGame = true;
                                     board_model.getChrono().start();
                                 }
@@ -137,7 +139,12 @@ public class Board_Controller
                                     board_model.discover_cell(a,b);
                                     board_model.getBoard_view().paint_table(); //actualizo el tablero
                                 }
-
+                                
+                                /**
+                                 * verifico si gano, perdio, o si continua
+                                 * jugando
+                                 */
+                                board_model.checkGame(a, b);
 
                             }
                             
