@@ -78,7 +78,7 @@ public class Game_Controller extends JFrame
             
             
             // actua de acuerdo a la entrada del usuario
-            switch( source.getText() )
+            switch( source.getName() )
             {
                 case "MinesWipper":
                     setActualView( game_model.getMines_menu() );

@@ -115,20 +115,25 @@ public class Board_View extends JPanel{
         this.time.setOpaque(true);
         
         // instacio y doy propidades al boton de reiniciar
-        this.restar = new JButton("Restar"); // falta colocar el icono de la carita al boton
+        this.restar = new JButton(); // falta colocar el icono de la carita al boton
         this.restar.setBounds( (this.board_view_container.getWidth() / 2) - (Board_Model.size_component / 2), 0,
                 Board_Model.size_component, Board_Model.size_component);
+        this.restar.setName("Restar");
             
         // instancio y doy propiedad al boton de menu
-        this.menu = new JButton("Menu"); 
+        this.menu = new JButton(); 
         this.menu.setBounds( 0, this.board_view_container.getHeight() - Board_Model.size_component,
                 Board_Model.size_component * 2, Board_Model.size_component);
+        this.menu.setName("Menu");
+        this.menu.setText("Menu");
         
         // instancio y doy propiedades al boton salir
         this.exit = new JButton("Exit"); 
         this.exit.setBounds( this.board_view_container.getWidth() - Board_Model.size_component * 2,
                 this.board_view_container.getHeight() - Board_Model.size_component,
                 Board_Model.size_component * 2, Board_Model.size_component);
+        this.exit.setName("Exit");
+        this.exit.setText("Exit");
     } // fin de initialize_components
     
     
