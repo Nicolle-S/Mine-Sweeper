@@ -6,6 +6,8 @@
 package View;
 
 import Model.Game_Model;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -18,7 +20,7 @@ public class Game_View_Menu1 extends javax.swing.JPanel
     private javax.swing.JButton exit;
     private javax.swing.JButton kColor;
     private javax.swing.JButton mines;
-    private javax.swing.JLabel tittle;
+    //private javax.swing.JLabel tittle;
     // End of variables declaration     
 
     /**
@@ -41,37 +43,29 @@ public class Game_View_Menu1 extends javax.swing.JPanel
         mines = new javax.swing.JButton();
         kColor = new javax.swing.JButton();
         exit = new javax.swing.JButton();
-        tittle = new javax.swing.JLabel();
         
-        
-        tittle.setFont(new java.awt.Font("Wide Latin", 0, 14)); // NOI18N
-        tittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tittle.setText("MinesWipper");
-        tittle.setBounds(0, 0, 200, 50);
-
-        
-        mines.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         mines.setName("MinesWipper");
-        mines.setText("MinesWipper");
-        mines.setBounds(0, 100, 200, 50);
-
-        kColor.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
+        mines.setBounds(15, 350, 249, 89);
+        mines.setIcon(new ImageIcon(this.getClass().getResource("/Images/Boton1.png")));
+        
         kColor.setName("K-Color");
-        kColor.setText("K-Color");
-        kColor.setBounds(0, 200, 200, 50);
+        kColor.setBounds(330, 350, 249, 89);
+        kColor.setIcon(new ImageIcon(this.getClass().getResource("/Images/Boton2.png")));
 
-        exit.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         exit.setName("Exit");
-        exit.setText("Exit");
-        exit.setBounds(0, 300, 200, 50);
+        exit.setBounds(250, 455, 100, 100);
+        exit.setIcon(new ImageIcon(this.getClass().getResource("/Images/salir.png")));
+        exit.setOpaque(false);
+        exit.setContentAreaFilled(false);
+        exit.setBorderPainted(false);
 
 
         this.setSize( Game_Model.WIDTH, Game_Model.HEIGHT);
         this.setLayout(null);
-        this.add(this.tittle);
         this.add(this.mines);
         this.add(this.kColor);
         this.add(this.exit);
+        
     }// </editor-fold>                        
 
 
@@ -100,4 +94,17 @@ public class Game_View_Menu1 extends javax.swing.JPanel
     public JButton getMines() {
         return mines;
     }
+    
+    @Override
+    public void paint(Graphics g) {
+        
+        g.drawImage( new ImageIcon(getClass().getResource("/Images/fondo.png")).getImage(), 0, 0, getWidth(), getHeight(),
+                        this);
+ 
+        setOpaque(false);
+        super.paint(g); //To change body of generated methods, choose Tools | Templates.
+        
+        
+    }
+    
 } // fin de Game_View_Menu1

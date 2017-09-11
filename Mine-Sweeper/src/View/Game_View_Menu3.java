@@ -6,6 +6,9 @@
 package View;
 
 import Model.Game_Model;
+import java.awt.Graphics;
+import java.awt.Insets;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -38,38 +41,31 @@ public class Game_View_Menu3 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        tittle = new javax.swing.JLabel();
         easy = new javax.swing.JButton();
         medium = new javax.swing.JButton();
         hard = new javax.swing.JButton();
-
-        tittle.setFont(new java.awt.Font("Wide Latin", 0, 14)); // NOI18N
-        tittle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tittle.setText("MinesWipper");
-        tittle.setBounds(0, 0, 200, 50);
-
-        easy.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
+        
         easy.setName("Easy");
-        easy.setText("Easy");
-        easy.setBounds(0, 100, 200, 50);
+        easy.setBounds(170, 165, 254, 74);
+        easy.setMargin(new Insets(0, 0, 0, 0));
+        easy.setIcon(new ImageIcon(getClass().getResource("/Images/Boton5.png")));
 
-        medium.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
         medium.setName("Medium");
-        medium.setText("Medium");
-        medium.setBounds(0, 200, 200, 50);
-
-
-        hard.setFont(new java.awt.Font("Wide Latin", 0, 12)); // NOI18N
+        medium.setBounds(170, 255, 254, 74);
+        medium.setMargin(new Insets(0, 0, 0, 0));
+        medium.setIcon(new ImageIcon(getClass().getResource("/Images/Boton6.png")));
+        
         hard.setName("Hard");
-        hard.setText("Hard");
-        hard.setBounds(0, 300, 200, 50);
+        hard.setBounds(170, 345, 254, 74);
+        hard.setMargin(new Insets(0, 0, 0, 0));
+        hard.setIcon(new ImageIcon(getClass().getResource("/Images/Boton7.png")));
 
         this.setSize( Game_Model.WIDTH, Game_Model.HEIGHT);
         this.setLayout(null);
-        this.add(this.tittle);
         this.add(this.easy);
         this.add(this.medium);
         this.add(this.hard);
+        
     }// </editor-fold>                                                     
 
 
@@ -87,7 +83,15 @@ public class Game_View_Menu3 extends javax.swing.JPanel {
         return medium;
     }
 
-    
+    @Override
+    public void paint(Graphics g) {
+        
+        g.drawImage( new ImageIcon(getClass().getResource("/Images/fondo3.png")).getImage(), 0, 0, getWidth(), getHeight(),
+                        this);
+ 
+        setOpaque(false);
+        super.paint(g); //To change body of generated methods, choose Tools | Templates.    
+    }
     
 
 }

@@ -59,15 +59,15 @@ public abstract class Board_Model
         if( Game_Model.difficulty != Game_Model.Difficulty.EASY )
             if( Game_Model.difficulty == Game_Model.Difficulty.MEDIUM )
             {
-                N_MINES = 40; 
-                N_ROWS = 15;
-                N_COLS = 15;
+                N_MINES = 30; 
+                N_ROWS = 12;
+                N_COLS = 12;
             }
             else
             {
-                N_MINES = 82;
-                N_ROWS = 15;
-                N_COLS = 25;
+                N_MINES = 80;
+                N_ROWS = 13;
+                N_COLS = 24;
             }
         else {
             N_MINES = 9;

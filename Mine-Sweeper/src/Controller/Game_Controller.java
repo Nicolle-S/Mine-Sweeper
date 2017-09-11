@@ -152,6 +152,7 @@ public class Game_Controller extends JFrame
                         getBoard_view().getBoard_view_container().getWidth() + 6,
                 game_model.getBoard_controller().getBoard_model().
                         getBoard_view().getBoard_view_container().getHeight() + 29);
+        
         this.setActualView(game_model.getBoard_controller().getBoard_model().
                 getBoard_view().getBoard_view_container());
         

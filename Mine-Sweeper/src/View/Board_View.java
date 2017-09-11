@@ -9,6 +9,7 @@ import Model.Board_Model;
 import Model.Game_Model;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -58,13 +59,13 @@ public class Board_View extends JPanel{
         
         if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE )
         {
-            this.setBounds( 0, Board_Model.size_component, 
+            this.setBounds( 0, 0, 
                     SIZE_IMAGEN*tab.getN_COLS(),SIZE_IMAGEN*tab.getN_ROWS());
             this.setVisible(true);
         }
         else
         {
-            this.setBounds( 0, Board_Model.size_component, 
+            this.setBounds( 0, 0, 
                     SIZE_IMAGEN*tab.getN_COLS() + 17,SIZE_IMAGEN*tab.getN_ROWS());
             this.setVisible(true); 
         }
@@ -76,12 +77,25 @@ public class Board_View extends JPanel{
     } // fin de Board_View
     
     
-    private void initialize_container()
-    {
+    private void initialize_container(){
+        
         // intancio y doy propiedades al contenedor
-        this.board_view_container = new JPanel( null );
-        this.board_view_container.setSize( this.getWidth(),
-                this.getHeight() + (Board_Model.size_component * 2));
+        this.board_view_container = new JPanel( null ){
+            
+            @Override
+            public void paint(Graphics g) {
+        
+                g.drawImage( new ImageIcon(getClass().getResource("/Images/fondoJuego.png")).getImage(), 0, 0, getWidth(), getHeight(),
+                        this);
+ 
+            setOpaque(false);
+            super.paint(g); //To change body of generated methods, choose Tools | Templates.    
+            }    
+        };
+        
+        this.board_view_container.setSize( this.getWidth() + 200,
+                this.getHeight() + 100);
+        
         this.board_view_container.setVisible(true);
     } // fin de initialize_container
     
@@ -122,18 +136,25 @@ public class Board_View extends JPanel{
             
         // instancio y doy propiedad al boton de menu
         this.menu = new JButton(); 
-        this.menu.setBounds( 0, this.board_view_container.getHeight() - Board_Model.size_component,
-                Board_Model.size_component * 2, Board_Model.size_component);
+        this.menu.setBounds( 10, this.board_view_container.getHeight() - (Board_Model.size_component+25),
+                80,80);
+        this.menu.setOpaque(false);
+        this.menu.setContentAreaFilled(false);
+        this.menu.setBorderPainted(false);
         this.menu.setName("Menu");
-        this.menu.setText("Menu");
+        this.menu.setIcon(new ImageIcon(this.getClass().getResource("/Images/volverMenu.png")));
         
         // instancio y doy propiedades al boton salir
         this.exit = new JButton("Exit"); 
-        this.exit.setBounds( this.board_view_container.getWidth() - Board_Model.size_component * 2,
-                this.board_view_container.getHeight() - Board_Model.size_component,
-                Board_Model.size_component * 2, Board_Model.size_component);
+        this.exit.setBounds( 150,
+                this.board_view_container.getHeight() - (Board_Model.size_component+25),
+                80, 80);
         this.exit.setName("Exit");
-        this.exit.setText("Exit");
+        this.exit.setIcon(new ImageIcon(this.getClass().getResource("/Images/salir2.png")));
+        this.exit.setOpaque(false);
+        this.exit.setContentAreaFilled(false);
+        this.exit.setBorderPainted(false);
+    
     } // fin de initialize_components
     
     

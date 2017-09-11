@@ -20,8 +20,8 @@ public class Game_Model
     public enum Difficulty{ EASY, MEDIUM, HARD } // define las dificultades del juego
     public static Difficulty difficulty; // dificultad del juego
     public static Game_Mode game_mode; // modo de juego
-    public static final int WIDTH = 300;
-    public static final int HEIGHT = 400;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
     private final Game_View_Menu1 main_menu;
     private final Game_View_Menu2 mines_menu;
     private final Game_View_Menu3 difficulty_menu;
@@ -86,5 +86,6 @@ public class Game_Model
      */
     public Game_View_Menu3 getDifficulty_menu() {
         return difficulty_menu;
+        
     } // fin de getDifficulty_menu
 } // fin de Game_Model
