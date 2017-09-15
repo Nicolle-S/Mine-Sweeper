@@ -17,18 +17,16 @@ public class K_Color_Controller {
     
     private final K_Color_Model colorModel;
 
-    public K_Color_Controller() {
+    public K_Color_Controller() 
+    {
         
         colorModel =  new K_Color_Model();
+        addEvente_Table();
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public K_Color_Model getColorModel() {
+        return colorModel;
+    }
     
     
     private void addEvente_Table()
@@ -57,23 +55,17 @@ public class K_Color_Controller {
                             return;
                         
                         
-                        
                         /**
                          * Verifico si fue el izquierdo
                          */
                         if( e.getButton() == MouseEvent.BUTTON1){
                               
                             colorModel.Discovered_cell(a, b);
+                            colorModel.getColor_view().paint_table();
                             colorModel.check_Mine(a, b);
-                            
                             colorModel.check_win();
-                                        
-                        }
-
-                            
-                            
-                        
-                        
+               
+                        } 
                     }
      
                 });

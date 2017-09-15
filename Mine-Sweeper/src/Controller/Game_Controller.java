@@ -8,6 +8,7 @@ package Controller;
 import Model.Board_Model;
 import Model.Game_Model;
 import View.Board_View;
+import View.K_color_View;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -85,7 +86,8 @@ public class Game_Controller extends JFrame
                     break;
                     
                 case "K-Color":
-                    System.out.println("Barredor de color");
+                    Game_Model.game_mode = Game_Model.Game_Mode.KCOLOR;
+                    startGame();
                     break;
                     
                 case "Exit":
@@ -135,33 +137,57 @@ public class Game_Controller extends JFrame
      */
     private void startGame()
     {
-        // instacio en modo de juego elegido
-        if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE )
+        if( Game_Model.game_mode == Game_Model.Game_Mode.KCOLOR )
         {
-            game_model.load_Board_Controller(Board_Model.SQUARE);
+            game_model.load_kColor_Controller();
+
+            // ajusto la ventana al modo de juego y la dificultad elejida
+            setSize(
+                    game_model.getkColor_controller().getColorModel().
+                            getColor_view().getkColor_view_container().getWidth() + 6,
+                    game_model.getkColor_controller().getColorModel().
+                            getColor_view().getkColor_view_container().getHeight() + 29);
+
+            setActualView(game_model.getkColor_controller().getColorModel().
+                            getColor_view().getkColor_view_container());
+
+
+            // agrego eventos a los componentes del juego
+            K_color_View view = game_model.getkColor_controller().getColorModel().getColor_view();
+            view.getRestar().addActionListener( this.listener_button );
+            view.getMenu().addActionListener( this.listener_button );
+            view.getExit().addActionListener( this.listener_button );
         }
         else
         {
-            game_model.load_Board_Controller( Board_Model.HEXAGON );
+            // instacio en modo de juego elegido
+            if( Game_Model.game_mode == Game_Model.Game_Mode.SQUARE )
+            {
+                game_model.load_Board_Controller(Board_Model.SQUARE);
+            }
+            else
+            {
+                game_model.load_Board_Controller( Board_Model.HEXAGON );
+            }
+
+
+            // ajusto la ventana al modo de juego y la dificultad elejida
+            this.setSize(
+                    game_model.getBoard_controller().getBoard_model().
+                            getBoard_view().getBoard_view_container().getWidth() + 6,
+                    game_model.getBoard_controller().getBoard_model().
+                            getBoard_view().getBoard_view_container().getHeight() + 29);
+
+            this.setActualView(game_model.getBoard_controller().getBoard_model().
+                    getBoard_view().getBoard_view_container());
+
+
+            // agrego eventos a los componentes del juego
+            Board_View view = this.game_model.getBoard_controller().getBoard_model().getBoard_view();
+            view.getRestar().addActionListener( this.listener_button );
+            view.getMenu().addActionListener( this.listener_button );
+            view.getExit().addActionListener( this.listener_button );
         }
-        
-        
-        // ajusto la ventana al modo de juego y la dificultad elejida
-        this.setSize(
-                game_model.getBoard_controller().getBoard_model().
-                        getBoard_view().getBoard_view_container().getWidth() + 6,
-                game_model.getBoard_controller().getBoard_model().
-                        getBoard_view().getBoard_view_container().getHeight() + 29);
-        
-        this.setActualView(game_model.getBoard_controller().getBoard_model().
-                getBoard_view().getBoard_view_container());
-        
-        
-        // agrego eventos a los componentes del juego
-        Board_View view = this.game_model.getBoard_controller().getBoard_model().getBoard_view();
-        view.getRestar().addActionListener( this.listener_button );
-        view.getMenu().addActionListener( this.listener_button );
-        view.getExit().addActionListener( this.listener_button );
     } // fin de startGame
 
     

@@ -52,6 +52,7 @@ public class K_Color_Model {
         Mines = 0;
         
         this.generateTable();
+        this.kColor_view = new K_color_View(this);
     }
     
     

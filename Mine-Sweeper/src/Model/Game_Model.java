@@ -6,6 +6,7 @@
 package Model;
 
 import Controller.Board_Controller;
+import Controller.K_Color_Controller;
 import View.Game_View_Menu1;
 import View.Game_View_Menu2;
 import View.Game_View_Menu3;
@@ -16,7 +17,7 @@ import View.Game_View_Menu3;
  */
 public class Game_Model 
 {
-    public enum Game_Mode{ SQUARE, HEXAGON} // define el tipo de juego
+    public enum Game_Mode{ SQUARE, HEXAGON, KCOLOR} // define el tipo de juego
     public enum Difficulty{ EASY, MEDIUM, HARD } // define las dificultades del juego
     public static Difficulty difficulty; // dificultad del juego
     public static Game_Mode game_mode; // modo de juego
@@ -26,6 +27,7 @@ public class Game_Model
     private final Game_View_Menu2 mines_menu;
     private final Game_View_Menu3 difficulty_menu;
     private Board_Controller board_controller;
+    private K_Color_Controller kColor_controller;
     
     
     /**
@@ -49,6 +51,15 @@ public class Game_Model
     {
         this.board_controller = new Board_Controller( modoJuego );
     }
+    
+     /**
+     * Intanscia el controlador del tablero del k-color
+     * @param modoJuego 
+     */
+    public void load_kColor_Controller()
+    {
+        this.kColor_controller = new K_Color_Controller();
+    }
 
     /**
      * Retorna el board_controller
@@ -57,6 +68,10 @@ public class Game_Model
     public Board_Controller getBoard_controller() 
     {
         return board_controller;
+    }
+
+    public K_Color_Controller getkColor_controller() {
+        return kColor_controller;
     }
     
     
