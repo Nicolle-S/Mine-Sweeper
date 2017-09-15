@@ -5,6 +5,8 @@
  */
 package Model;
 
+import View.Board_View;
+import View.K_color_View;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -25,11 +27,13 @@ public class K_Color_Model {
     final int ROWS;
     int Diag;
     int Mines;
+    public static final int size_component = 100; // tamano de los elemtos de la GUI del tablero
+    private K_color_View kColor_view;
+    private Cell_Color_Model[][] table;
     
-    Cell_Color_Model[][] table;
     
-    
-    public K_Color_Model() {
+    public K_Color_Model() 
+    {
        
         TOTAL_MINE = 6;
         YELLOW = 1;
@@ -43,6 +47,8 @@ public class K_Color_Model {
         table = new Cell_Color_Model[ROWS][COLS];
         EMPTY = 0;
         Mines = 0;
+        
+        this.generateTable();
     }
     
     
@@ -56,6 +62,11 @@ public class K_Color_Model {
 
     public int getROWS() {
         return ROWS;
+    }
+    
+        protected void load_kColor_View()
+    {
+        this.kColor_view = new K_color_View( this );
     }
     
     /**
