@@ -30,7 +30,6 @@ public abstract class Board_Model
     protected final int EMPTY_CELL; // celda vacia
     protected final int MINE_CELL; // celda con una mina
     protected final int COVERED_MINE_CELL; // celda cubierta con una mina
-    //private final int MARKED_MINE_CELL; // celda marcada que contiene una mina
     public static final int size_component = 50; // tamano de los elemtos de la GUI del tablero
     protected final int N_MINES; // numero de minas
     protected final int N_ROWS; // filas
