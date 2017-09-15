@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class K_Color_Model {
     
+    public enum StateGame{ WIN, GAME_OVER, PLAY } //determina el estado de juego
+    public static StateGame state; // estado del juego
     final int TOTAL_MINE;
     final int YELLOW;
     final int BLUE;
@@ -34,7 +36,8 @@ public class K_Color_Model {
     
     public K_Color_Model() 
     {
-       
+        
+        K_Color_Model.state = K_Color_Model.StateGame.PLAY;
         TOTAL_MINE = 6;
         YELLOW = 1;
         BLUE = 2;
@@ -319,6 +322,7 @@ public class K_Color_Model {
                 if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
                    && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == true ){
                     
+                    K_Color_Model.state = StateGame.GAME_OVER;
                     JOptionPane.showMessageDialog(null, "HAS DESCUBIERTO DOS VERTICES QUE VIOLAN LA REGLA DE COLOR. PERDISTE");
                 }
                 
@@ -326,7 +330,7 @@ public class K_Color_Model {
         }
     }
     
-    public boolean check_win(){
+    public void check_win(){
         
         for (int i = 0; i < ROWS; i++) {
             
@@ -337,7 +341,7 @@ public class K_Color_Model {
                  * destapada, aun no ha ganado
                  */
                 if(table[i][j].Mine == false && table[i][j].discovered == false){
-                    return false;
+                    return;
                 }
                 
                 /**
@@ -353,13 +357,14 @@ public class K_Color_Model {
                         if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
                            && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == false ){
                            
-                            return false;
+                            return;
                         }   
                     }
                 }
             }
         }
-        return true;
+        K_Color_Model.state = StateGame.WIN;
+        JOptionPane.showMessageDialog(null, "FELICIDADES, GANASTE");
     }
     
  

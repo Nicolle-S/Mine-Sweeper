@@ -58,6 +58,9 @@ public class Cell_Color_Model {
         return valor_Edge;
     }
     
+   
+
+    
     private void Initialize_Adjacent(){
         
         for (int i = 0; i < 5; i++) {

@@ -59,6 +59,36 @@ public class K_color_View extends JPanel{
         this.initialize_components();
         this.load_components();
     }
+
+    public ImageIcon[] getIm() {
+        return Im;
+    }
+
+    public JButton[][] getTableB() {
+        return tableB;
+    }
+
+    public K_Color_Model getTab() {
+        return tab;
+    }
+
+    public JPanel getkColor_view_container() {
+        return kColor_view_container;
+    }
+
+    public JButton getMenu() {
+        return menu;
+    }
+
+    public JButton getRestar() {
+        return restar;
+    }
+
+    public JButton getExit() {
+        return exit;
+    }
+    
+    
     
     private void initialize_container(){
         
