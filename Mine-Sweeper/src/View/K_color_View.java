@@ -185,7 +185,11 @@ public class K_color_View extends JPanel{
                 
                 if(tab.getTable()[i][j] != null && tab.getTable()[i][j].isEdge() == true){
                     
-                    tableB[i][j].setIcon(Im[ tab.getTable()[i][j].getValor_Edge() ]); // dibujo la arista que corresponde
+                    if( tab.getTable()[i][j].getValor_Edge() == -6 ){
+                        tableB[i][j].setIcon(Im[0]);
+                    }
+                    else
+                        tableB[i][j].setIcon(Im[ tab.getTable()[i][j].getValor_Edge() ]); // dibujo la arista que corresponde
                 }
                 
                 if(tab.getTable()[i][j] != null && tab.getTable()[i][j].isEdge() ==false && tab.getTable()[i][j].isDiscovered() ){

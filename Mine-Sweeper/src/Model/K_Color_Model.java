@@ -38,7 +38,7 @@ public class K_Color_Model {
     {
         
         K_Color_Model.state = K_Color_Model.StateGame.PLAY;
-        TOTAL_MINE = 6;
+        TOTAL_MINE = 8;
         YELLOW = 1;
         BLUE = 2;
         RED = 3;
@@ -173,7 +173,7 @@ public class K_Color_Model {
         for (int i = 0; i < ROWS; i++) {
             
             for (int j = 0; j < COLS; j++) {
-                
+//                System.out.println("-----[" + i + "/" + j + "]----------");
                 pos = 0;
                 
                 if( i % 2 ==0 && j % 2 == 0){ // si estoy parada en un vertice
@@ -181,62 +181,91 @@ public class K_Color_Model {
                     table[i][j] = new Cell_Color_Model();
                     
                     if( (i - 1) >= 0 && table[i-1][j] != null ){ // si esto se cumple entonces el vertice de arriba es un vertice adyacente
-                        
+//                        System.out.println("ARR");
+//                        System.out.println(pos);
                         table[i][j].Xadjacent[pos] = (i-2);
                         table[i][j].Yadjacent[pos] = j;
+//                        System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                        System.out.println("----------------------------------------");
                         pos ++;
                     }
                     
                     if( (i + 1) < ROWS && table[i+1][j] != null ){ // si esto se cumple entonces el vertice de abajo es un vertice adyacente
-                        
+//                        System.out.println("ABJ");
+//                        System.out.println(pos);
                         table[i][j].Xadjacent[pos] = (i+2);
                         table[i][j].Yadjacent[pos] = j;
+//                        System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                         System.out.println("----------------------------------------");
                         pos ++;
                     }
                     
                     if( (j - 1) >= 0 && table[i][j-1] != null){ //quiere decir que el vertice a la izquiera de este es adyacente
-                        
+//                        System.out.println("I");
+//                        System.out.println(pos);
                         table[i][j].Xadjacent[pos] = i;
-                        table[i][j].Yadjacent[pos] = (j-1);
+                        table[i][j].Yadjacent[pos] = (j-2);
+//                        System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                         System.out.println("----------------------------------------");
                         pos ++; 
                         
                     }
                     
                     if( (j + 1) < COLS && table[i][j+1] != null){ //quiere decir que el vertice a la derecha de este es adyacente
-                        
+//                        System.out.println("D");
+//                        System.out.println(pos);
                         table[i][j].Xadjacent[pos] = i;
-                        table[i][j].Yadjacent[pos] = (j+1);
+                        table[i][j].Yadjacent[pos] = (j+2);
+//                        System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                         System.out.println("----------------------------------------");
                         pos ++; 
                         
                     }
                     
-                    if( (i - 1) >= 0 && (j - 1) >=0 && table[i-1][j-1] != null ){ // hay vertice adyacente en la diagonal superior izquierda
+                    if( (( (j==0) || (j == COLS-1)) && (i % 4 == 0)) || ((j == 2) && ( i == 2 || i == 6)) ){
                         
-                        table[i][j].Xadjacent[pos] = i-1;
-                        table[i][j].Yadjacent[pos] = (j-1);
-                        pos ++;
+                        if( (i - 1) >= 0 && (j - 1) >=0 && table[i-1][j-1] != null ){ // hay vertice adyacente en la diagonal superior izquierda
+//                            System.out.println("DSI");
+//                            System.out.println(pos);
+                            table[i][j].Xadjacent[pos] = i-2;
+                            table[i][j].Yadjacent[pos] = (j-2);
+//                            System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                             System.out.println("----------------------------------------");
+                            pos ++;
+                        }
+                    
+                        if( (i - 1) >= 0 && (j + 1) < COLS && table[i-1][j+1] != null ){ // hay vertice adyacente en la diagonal superior derecha
+//                            System.out.println("DSD");
+//                            System.out.println(pos);
+                            table[i][j].Xadjacent[pos] = i-2;
+                            table[i][j].Yadjacent[pos] = (j+2);
+//                            System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                             System.out.println("----------------------------------------");
+                            pos ++;
+                        }
+                    
+                        if( (i + 1) < ROWS && (j - 1) >= 0 && table[i+1][j-1] != null ) { // adyaencia en la diagonal inferior izquierda
+//                            System.out.println("DII");
+//                            System.out.println(pos);
+                            table[i][j].Xadjacent[pos] = i+2;
+                            table[i][j].Yadjacent[pos] = (j-2);
+//                            System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                             System.out.println("----------------------------------------");
+                            pos ++;
+                        }
+
+                        if( (i + 1) < ROWS && (j + 1) < COLS && table[i+1][j+1] != null ) { // adyaencia en la diagonal inferior derecha
+//                            System.out.println("DID");
+//                            System.out.println(pos);
+                            table[i][j].Xadjacent[pos] = i+2;
+                            table[i][j].Yadjacent[pos] = (j+2);
+//                            System.out.println(table[i][j].Xadjacent[pos] + "/" + table[i][j].Yadjacent[pos] );
+//                             System.out.println("----------------------------------------");
+                            pos ++;
+                        }
+  
                     }
                     
-                    if( (i - 1) >= 0 && (j + 1) < COLS && table[i-1][j+1] != null ){ // hay vertice adyacente en la diagonal superior derecha
-                        
-                        table[i][j].Xadjacent[pos] = i-1;
-                        table[i][j].Yadjacent[pos] = (j+1);
-                        pos ++;
-                    }
-                    
-                    if( (i + 1) < ROWS && (j - 1) >= 0 && table[i+1][j-1] != null ) { // adyaencia en la diagonal inferior izquierda
-                        
-                        table[i][j].Xadjacent[pos] = i+1;
-                        table[i][j].Yadjacent[pos] = (j-1);
-                        pos ++;
-                    }
-                    
-                    if( (i + 1) < ROWS && (j + 1) < COLS && table[i+1][j+1] != null ) { // adyaencia en la diagonal inferior derecha
-                        
-                        table[i][j].Xadjacent[pos] = i+1;
-                        table[i][j].Yadjacent[pos] = (j+1);
-                        pos ++;
-                    }
                 }
             }
             
@@ -252,8 +281,14 @@ public class K_Color_Model {
             
             for (int j = 0; j < COLS; j++) {
                 
-                for (int k = 0; k < table[i][j].Xadjacent.length; k++) {
+                for (int k = 0; table[i][j] != null && k < table[i][j].Xadjacent.length; k++) {
                     
+                    if(table[i][j].Xadjacent[k] == -1){
+                        
+                        break;
+                    }
+                    System.out.println("i=" + i + "/" + "j=" + j + "/" + "k=" + k + "/" +
+                            "x=" + table[i][j].Xadjacent[k] + "/" + "y=" + table[i][j].Yadjacent[k]);
                     /**
                      * verifico si hay un vertice que contenga un vertice adyacente con el mismo color
                      */
