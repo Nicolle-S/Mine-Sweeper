@@ -63,6 +63,12 @@ public class K_Color_Model {
     public int getROWS() {
         return ROWS;
     }
+
+    public K_color_View getColor_view() {
+        return kColor_view;
+    }
+    
+    
     
         protected void load_kColor_View()
     {
