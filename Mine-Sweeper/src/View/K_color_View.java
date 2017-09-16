@@ -30,6 +30,7 @@ public class K_color_View extends JPanel{
     private JButton menu; // representa el boton de volver al menu
     private JButton restar; // representa el boton de reiniciar
     private JButton exit; // representa el boton de salir del Juego
+    private JLabel mines; // representa la cantidad de minas en la GUI
     
     
     
@@ -50,7 +51,7 @@ public class K_color_View extends JPanel{
         
         // da propiedades al tablero del juego
         this.setLayout(null);
-        this.setBounds( 0, K_Color_Model.size_component, 
+        this.setBounds( 0, 0, 
                     SIZE_IMAGEN*tab.getCOLS(),SIZE_IMAGEN*tab.getROWS());
         this.setVisible(true);
         
@@ -95,8 +96,8 @@ public class K_color_View extends JPanel{
         // intancio y doy propiedades al contenedor
         this.kColor_view_container = new JPanel( null );  
         
-        this.kColor_view_container.setSize( this.getWidth(),
-                this.getHeight() + 100);
+        this.kColor_view_container.setSize( this.getWidth() + SIZE_IMAGEN * 4,
+                this.getHeight());
         
         this.kColor_view_container.setVisible(true);
     } // fin de initialize_container
@@ -104,16 +105,23 @@ public class K_color_View extends JPanel{
     
     private void initialize_components()
     {    
+        // instancio y doy propiedades al label de minas
+        this.mines = new JLabel( "Mines: " + String.valueOf( this.tab.getTOTAL_MINE() ) );
+        this.mines.setBounds( 300 , 0,
+                K_Color_Model.size_component, K_Color_Model.size_component / 2);
+        this.mines.setVerticalAlignment(JLabel.CENTER);
+        this.mines.setHorizontalAlignment(JLabel.CENTER);
+        
         // instacio y doy propidades al boton de reiniciar
         this.restar = new JButton(); // falta colocar el icono de la carita al boton
-        this.restar.setBounds( (this.kColor_view_container.getWidth() / 2) - (K_Color_Model.size_component / 2), 0,
-                K_Color_Model.size_component, K_Color_Model.size_component);
+        this.restar.setBounds( 300 , 83,
+                K_Color_Model.size_component, K_Color_Model.size_component / 2);
         this.restar.setText("Restar");
         this.restar.setName("Restar");
             
         // instancio y doy propiedad al boton de menu
         this.menu = new JButton(); 
-        this.menu.setBounds( 0, 0, K_Color_Model.size_component, K_Color_Model.size_component);
+        this.menu.setBounds( 300, 216, K_Color_Model.size_component, K_Color_Model.size_component / 2);
 //        this.menu.setOpaque(false);
 //        this.menu.setContentAreaFilled(false);
 //        this.menu.setBorderPainted(false);
@@ -123,14 +131,15 @@ public class K_color_View extends JPanel{
         
         // instancio y doy propiedades al boton salir
         this.exit = new JButton("Exit"); 
-        this.exit.setBounds( (this.kColor_view_container.getWidth() - K_Color_Model.size_component), 0,
-                K_Color_Model.size_component, K_Color_Model.size_component);
+        this.exit.setBounds( 300, 349,
+                K_Color_Model.size_component, K_Color_Model.size_component / 2);
         this.exit.setName("Exit");
         this.exit.setText("Exit");
 //        this.exit.setIcon(new ImageIcon(this.getClass().getResource("/Images/salir2.png")));
 //        this.exit.setOpaque(false);
 //        this.exit.setContentAreaFilled(false);
 //        this.exit.setBorderPainted(false);
+
     
     } // fin de initialize_components
             
@@ -141,6 +150,7 @@ public class K_color_View extends JPanel{
         this.kColor_view_container.add( this.restar );
         this.kColor_view_container.add( this.menu );
         this.kColor_view_container.add( this.exit );
+        this.kColor_view_container.add(this.mines);
     } // fin de load_components
     
     
@@ -185,8 +195,8 @@ public class K_color_View extends JPanel{
                 if(tab.getTable()[i][j] == null)
                     System.out.print("N  ");
                 else if( tab.getTable()[i][j].isEdge() )
-                    System.out.print(tab.getTable()[i][j].getValor_Edge() + "  ");
-//                        System.out.print("A  ");
+//                    System.out.print(tab.getTable()[i][j].getValor_Edge() + "  ");
+                        System.out.print("A  ");
                 else
                     System.out.print((tab.getTable()[i][j].getColor() == -1 ? 
                             "V": tab.getTable()[i][j].getColor() ) + "  ");
@@ -208,6 +218,8 @@ public class K_color_View extends JPanel{
             System.out.println("");
         }
         
-        
+        System.out.println(tab.quantity_Mine());
+        tab.printTableMines();
+        tab.quantity_Mine();
     } // fin de paint_table   
 }

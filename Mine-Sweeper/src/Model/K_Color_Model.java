@@ -72,9 +72,9 @@ public class K_Color_Model {
     public K_color_View getColor_view() {
         return kColor_view;
     }
+
     
-    
-    
+        
         protected void load_kColor_View()
     {
         this.kColor_view = new K_color_View( this );
