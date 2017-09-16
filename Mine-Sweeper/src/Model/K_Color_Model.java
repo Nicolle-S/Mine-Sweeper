@@ -206,7 +206,32 @@ public class K_Color_Model {
         
         table[i][j].color = -1;
         table[i][j].Mine = false;
+        restart();
+        
         return false;
+    }
+    
+    public void restart(){
+        
+        for (int i = 0; i < ROWS; i++) {
+            
+            for (int j = 0; j < COLS; j++) {
+                
+                if( i % 2 == 0 && j % 2 ==0){
+                    
+                    table[i][j].Mine = false;
+                    
+                }
+                
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
     }
     
     private void printTable()
@@ -413,8 +438,13 @@ public class K_Color_Model {
             
             for (int k = 0; k < table[i][i].Xadjacent.length; k++) {
                 
+                if(table[i][j].Xadjacent[k] == -1){
+                    return;
+                }
+                
                 if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
-                   && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == true ){
+                   && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == true 
+                   && table[i][j].color == table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].color ){
                     
                     K_Color_Model.state = StateGame.GAME_OVER;
                     JOptionPane.showMessageDialog(null, "HAS DESCUBIERTO DOS VERTICES QUE VIOLAN LA REGLA DE COLOR. PERDISTE");
@@ -447,6 +477,10 @@ public class K_Color_Model {
                 if(table[i][j].Mine == true && table[i][j].discovered == false){
                     
                     for (int k = 0; k < table[i][j].Xadjacent.length; k++) {
+                        
+                        if(table[i][j].Xadjacent[k] == -1){
+                            break;
+                        }
                         
                         if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
                            && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == false ){
