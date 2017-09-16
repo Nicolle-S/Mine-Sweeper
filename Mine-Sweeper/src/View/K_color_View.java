@@ -106,7 +106,7 @@ public class K_color_View extends JPanel{
     private void initialize_components()
     {    
         // instancio y doy propiedades al label de minas
-        this.mines = new JLabel( "Mines: " + String.valueOf( this.tab.getTOTAL_MINE() ) );
+        this.mines = new JLabel( "Mines: " + String.valueOf( this.tab.quantity_Mine() ) );
         this.mines.setBounds( 300 , 0,
                 K_Color_Model.size_component, K_Color_Model.size_component / 2);
         this.mines.setVerticalAlignment(JLabel.CENTER);

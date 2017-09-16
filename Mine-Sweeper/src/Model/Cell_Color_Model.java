@@ -25,7 +25,7 @@ public class Cell_Color_Model {
         Xadjacent = new int[5];
         Yadjacent = new int[5];
         Mine = false;
-        discovered = true; ///////////////////////
+        discovered = false; ///////////////////////
         edge = false;
         Initialize_Adjacent();
     }

@@ -107,6 +107,9 @@ public class Board_Controller
                          */
                         if( e.getButton() == MouseEvent.BUTTON1){
                             
+                            if( !board_model.getChrono().isRunning() )
+                                board_model.getChrono().start();
+                            
                             /**
                              * Valido que solo pueda descubrir celdas aun
                              * cubiertas

@@ -30,7 +30,7 @@ public class K_Color_Model {
     final int ROWS;
     int Diag;
     int Mines;
-    public static final int size_component = 50; // tamano de los elemtos de la GUI del tablero
+    public static final int size_component = 100; // tamano de los elemtos de la GUI del tablero
     private K_color_View kColor_view;
     private Cell_Color_Model[][] table;
     
@@ -225,14 +225,28 @@ public class K_Color_Model {
                 
             }
             
-        }
-        
-        
-        
-        
-        
-        
+        }   
     }
+    
+    
+    public void printTableMines()
+    {
+        for (int i = 0; i < ROWS; i++) {
+            
+            for (int j = 0; j < COLS; j++) {
+                if(table[i][j] == null)
+                    System.out.print("N  ");
+                else if( table[i][j].isEdge() )
+//                    System.out.print(tab.getTable()[i][j].getValor_Edge() + "  ");
+                        System.out.print("A  ");
+                else
+                    System.out.print((table[i][j].isMine() ? 
+                            "M": "S" ) + "  ");
+            }
+            System.out.println("");
+        }
+    }
+    
     
     private void printTable()
     {
@@ -436,7 +450,7 @@ public class K_Color_Model {
          */
         if( table[i][j].Mine == true){
             
-            for (int k = 0; k < table[i][i].Xadjacent.length; k++) {
+            for (int k = 0; k < table[i][j].Xadjacent.length; k++) {
                 
                 if(table[i][j].Xadjacent[k] == -1){
                     return;
@@ -456,43 +470,96 @@ public class K_Color_Model {
     
     public void check_win(){
         
+//        for (int i = 0; i < ROWS; i++) {
+//            
+//            for (int j = 0; j < COLS; j++) {
+//                
+//                /**
+//                 * si hay una celda que no es una mina y ademas aun no ha sido 
+//                 * destapada, aun no ha ganado
+//                 */
+//                if(table[i][j].Mine == false && table[i][j].discovered == false){
+//                    return;
+//                }
+//                
+//                /**
+//                 * si hay una mina que esta aun cubierta y tiene minas adyacentes
+//                 * que tambien estan cubiertas aun no ha ganado. debe destapar al menos 
+//                 * las minas adyacentes que no violan la configuracion del color
+//                 * 
+//                 */
+//                if(table[i][j].Mine == true && table[i][j].discovered == false){
+//                    
+//                    for (int k = 0; k < table[i][j].Xadjacent.length; k++) {
+//                        
+//                        if(table[i][j].Xadjacent[k] == -1){
+//                            break;
+//                        }
+//                        
+//                        if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
+//                           && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == false
+//                                && table[i][j].color == table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k]].color){
+//                           
+//                            return;
+//                        }   
+//                    }
+//                }
+//            }
+//        }
+
+        
+        int cover_cells = 0;
+
         for (int i = 0; i < ROWS; i++) {
-            
+
             for (int j = 0; j < COLS; j++) {
-                
-                /**
-                 * si hay una celda que no es una mina y ademas aun no ha sido 
-                 * destapada, aun no ha ganado
-                 */
-                if(table[i][j].Mine == false && table[i][j].discovered == false){
-                    return;
-                }
-                
-                /**
-                 * si hay una mina que esta aun cubierta y tiene minas adyacentes
-                 * que tambien estan cubiertas aun no ha ganado. debe destapar al menos 
-                 * las minas adyacentes que no violan la configuracion del color
-                 * 
-                 */
-                if(table[i][j].Mine == true && table[i][j].discovered == false){
-                    
-                    for (int k = 0; k < table[i][j].Xadjacent.length; k++) {
-                        
-                        if(table[i][j].Xadjacent[k] == -1){
-                            break;
-                        }
-                        
-                        if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
-                           && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == false ){
-                           
-                            return;
-                        }   
+            
+                if( (i % 2 == 0) && ( j %2 == 0) )
+                {
+                    if( table[i][j].discovered == false )
+                    {
+                        cover_cells++;
                     }
                 }
             }
         }
-        K_Color_Model.state = StateGame.WIN;
-        JOptionPane.showMessageDialog(null, "FELICIDADES, GANASTE");
+        
+        int game_over_count = 0;
+        
+        for (int i = 0; i < ROWS; i++) {
+
+            for (int j = 0; j < COLS; j++) {
+            
+                if( (i % 2 == 0) && ( j %2 == 0) )
+                {
+                    if( table[i][j].discovered == false )
+                    {
+                        for (int k = 0; k < table[i][j].Xadjacent.length; k++) {
+//                        
+                            if(table[i][j].Xadjacent[k] == -1){
+                                break;
+                            }
+    //                        
+                            if(table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].Mine == true
+                               && table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k] ].discovered == true
+                                    && table[i][j].color == table[ table[i][j].Xadjacent[k] ][ table[i][j].Yadjacent[k]].color){
+                                game_over_count++;
+                                break;
+                            }
+
+                        }
+                    }
+
+                }
+
+            }
+        }
+    
+        if( cover_cells == game_over_count )
+        {    
+            K_Color_Model.state = StateGame.WIN;
+            JOptionPane.showMessageDialog(null, "FELICIDADES, GANASTE");
+        }
     }
     
  

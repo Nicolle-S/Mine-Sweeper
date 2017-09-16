@@ -192,7 +192,6 @@ public abstract class Board_Model
         if( table[i][j] < 20 )
         {
             table[i][j] -= COVER_FOR_CELL;
-            this.iniciarChrono();
         }
     }
     

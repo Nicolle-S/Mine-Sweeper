@@ -108,7 +108,8 @@ public class Board_View extends JPanel{
         // intacio y doy propiedades al label de las marcas
         this.marks = new JLabel(); // se debe modificar el por el numero de minas
         this.setMarks( tab.getN_MINES() );
-        this.marks.setBounds( 0, 0, Board_Model.size_component * 2, Board_Model.size_component);
+        this.marks.setBounds( this.board_view_container.getWidth() - Board_Model.size_component * 2,
+                Board_Model.size_component * 2, Board_Model.size_component * 2, Board_Model.size_component);
         this.marks.setHorizontalAlignment( JLabel.CENTER );
         this.marks.setVerticalAlignment( JLabel.CENTER );
         this.marks.setFont( labels );
@@ -130,9 +131,10 @@ public class Board_View extends JPanel{
         
         // instacio y doy propidades al boton de reiniciar
         this.restar = new JButton(); // falta colocar el icono de la carita al boton
-        this.restar.setBounds( (this.board_view_container.getWidth() / 2) - (Board_Model.size_component / 2), 0,
-                Board_Model.size_component, Board_Model.size_component);
+        this.restar.setBounds( this.board_view_container.getWidth() - Board_Model.size_component * 2,
+                Board_Model.size_component * 4, Board_Model.size_component * 2, Board_Model.size_component);
         this.restar.setName("Restar");
+        this.restar.setText("Restart");
             
         // instancio y doy propiedad al boton de menu
         this.menu = new JButton(); 
