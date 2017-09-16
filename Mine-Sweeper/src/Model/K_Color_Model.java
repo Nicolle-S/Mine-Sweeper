@@ -144,26 +144,48 @@ public class K_Color_Model {
     /**
      * Carga cada vertice del tablero con uno de los tres colores permitidos.
      */
-    public void Load_Colors(){
+    public boolean Load_Colors( int i, int j, int mines ){
         
-        Random a = new Random();
-        int color = 0;
+        Random nums = new Random();
+        int op = 0;
+        int[] colors = new int[3];
+        boolean invalid =  false;
+        int act_color = 0;
         
-        for (int i = 0; i < ROWS; i++) {
 
-            for (int j = 0; j < COLS; j++) {
+        
+        for( int c = 0; c < 3; c++ )
+        {   
+            while( invalid ){
+                
+                op = (nums.nextInt() % 3) + 1;
+                invalid = false;
 
-                if( (i % 2) == 0 && (j % 2) == 0){
-
-                    color = a.nextInt()%3 + 1;
-
-                    if(color<0)
-                       color *= -1;
-                    
-                    table[i][j].color = color;
+                for( int v = c; v >= 0; v-- )
+                {
+                    if( op == colors[v] )
+                        invalid = true;
                 }
             }
+            
+            colors[c] = op;
         }
+        
+        // si se llego al final de la matriz retorna true
+        
+        for( int c = 0; c < 3; c++ ){
+            table[i][j].color = colors[c];
+            
+            // chequeo si es una mina, aumenta las minas y si se pasan hago continue
+            
+            // aumetar la i y la j 
+            
+            if(Load_Colors(i, j, mines))
+                return true;
+        }
+        
+        // retorno false
+        return true;
     }
     
     public void Load_adjacent(){
