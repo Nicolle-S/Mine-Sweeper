@@ -38,7 +38,7 @@ public class K_color_View extends JPanel{
         // inicializacion de contantes y campos
         QUANTITY_IM = 7;
         this.tab = tab;
-        SIZE_IMAGEN = 100;
+        SIZE_IMAGEN = 50;
         
         // inicializa las celdas del juego
         tableB = new JButton[tab.getROWS()][tab.getCOLS()];
@@ -182,6 +182,14 @@ public class K_color_View extends JPanel{
         for (int i = 0; i < tab.getROWS(); i++) {
             
             for (int j = 0; j < tab.getCOLS(); j++) {
+                if(tab.getTable()[i][j] == null)
+                    System.out.print("N  ");
+                else if( tab.getTable()[i][j].isEdge() )
+                    System.out.print(tab.getTable()[i][j].getValor_Edge() + "  ");
+//                        System.out.print("A  ");
+                else
+                    System.out.print((tab.getTable()[i][j].getColor() == -1 ? 
+                            "V": tab.getTable()[i][j].getColor() ) + "  ");
                 
                 if(tab.getTable()[i][j] != null && tab.getTable()[i][j].isEdge() == true){
                     
@@ -196,7 +204,10 @@ public class K_color_View extends JPanel{
                     
                     tableB[i][j].setIcon(Im[ tab.getTable()[i][j].getColor() ]);
                 }
-            }   
+            }
+            System.out.println("");
         }
+        
+        
     } // fin de paint_table   
 }

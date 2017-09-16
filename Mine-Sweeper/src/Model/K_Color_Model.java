@@ -8,6 +8,7 @@ package Model;
 import View.Board_View;
 import View.K_color_View;
 import java.util.Random;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,7 +30,7 @@ public class K_Color_Model {
     final int ROWS;
     int Diag;
     int Mines;
-    public static final int size_component = 100; // tamano de los elemtos de la GUI del tablero
+    public static final int size_component = 50; // tamano de los elemtos de la GUI del tablero
     private K_color_View kColor_view;
     private Cell_Color_Model[][] table;
     
@@ -102,7 +103,9 @@ public class K_Color_Model {
         
         for (int i = 0; i < ROWS; i++) {
             
-            Diag *= -1;
+            if( i % 2 != 0){
+                Diag *= -1;
+            }
             
             for (int j = 0; j < COLS; j++) {
                 
@@ -144,31 +147,28 @@ public class K_Color_Model {
     /**
      * Carga cada vertice del tablero con uno de los tres colores permitidos.
      */
-    public boolean Load_Colors( int i, int j, int mines ){
-        
+    public boolean Load_Colors( int i, int j ){
+        Scanner in = new Scanner(System.in);
         Random nums = new Random();
-        int op = 0;
         int[] colors = new int[3];
-        boolean invalid =  false;
-        int act_color = 0;
-        
+        boolean invalid;
+        int newi = i;
+        int newj = j;
 
         
         for( int c = 0; c < 3; c++ )
         {   
-            while( invalid ){
+            do{
                 
-                op = (nums.nextInt() % 3) + 1;
+                colors[c] = nums.nextInt(3) + 1;
                 invalid = false;
 
-                for( int v = c; v >= 0; v-- )
+                for( int v = c - 1; v >= 0; v-- )
                 {
-                    if( op == colors[v] )
+                    if( colors[c] == colors[v] )
                         invalid = true;
                 }
-            }
-            
-            colors[c] = op;
+            }while( invalid );
         }
         
         // si se llego al final de la matriz retorna true
@@ -177,15 +177,54 @@ public class K_Color_Model {
             table[i][j].color = colors[c];
             
             // chequeo si es una mina, aumenta las minas y si se pasan hago continue
+            if( quantity_Mine() > TOTAL_MINE )
+                continue;
             
-            // aumetar la i y la j 
+            // aumetar la i y la j
+            if( j == 4 )
+            {
+                newi = i + 2;
+                newj = 0;
+            }
+            else
+            {
+                newj = j + 2;
+            }
             
-            if(Load_Colors(i, j, mines))
+            if( newi > 8 )
+                return true;
+            
+            
+            if(Load_Colors( newi, newj))
                 return true;
         }
         
         // retorno false
-        return true;
+        this.printTable();
+        System.out.println(this.quantity_Mine());
+//        in.next();
+        
+        table[i][j].color = -1;
+        table[i][j].Mine = false;
+        return false;
+    }
+    
+    private void printTable()
+    {
+        for (int i = 0; i < ROWS; i++) {
+            
+            for (int j = 0; j < COLS; j++) {
+                if(table[i][j] == null)
+                    System.out.print("N  ");
+                else if( table[i][j].isEdge() )
+//                    System.out.print(tab.getTable()[i][j].getValor_Edge() + "  ");
+                        System.out.print("A  ");
+                else
+                    System.out.print((table[i][j].getColor() == -1 ? 
+                            "V": table[i][j].getColor() ) + "  ");
+            }
+            System.out.println("");
+        }
     }
     
     public void Load_adjacent(){
@@ -309,12 +348,12 @@ public class K_Color_Model {
                         
                         break;
                     }
-                    System.out.println("i=" + i + "/" + "j=" + j + "/" + "k=" + k + "/" +
-                            "x=" + table[i][j].Xadjacent[k] + "/" + "y=" + table[i][j].Yadjacent[k]);
+//                    System.out.println("i=" + i + "/" + "j=" + j + "/" + "k=" + k + "/" +
+//                            "x=" + table[i][j].Xadjacent[k] + "/" + "y=" + table[i][j].Yadjacent[k]);
                     /**
                      * verifico si hay un vertice que contenga un vertice adyacente con el mismo color
                      */
-                    if( (i % 2 ) == 0 && (j % 2 )== 0 && table[i][j].color == table[table[i][j].Xadjacent[k]][table[i][j].Yadjacent[k]].color){
+                    if( (i % 2 ) == 0 && (j % 2 )== 0 && table[i][j].color != -1 && table[i][j].color == table[table[i][j].Xadjacent[k]][table[i][j].Yadjacent[k]].color){
                         
                         table[i][j].Mine = true;
                         table[ table[i][j].Xadjacent[k] ] [ table[i][j].Yadjacent[k] ].Mine =true;
@@ -349,10 +388,7 @@ public class K_Color_Model {
         Load_edge(); // doy memoria y valor a las que son aristas
         Load_adjacent(); // doy memoria a los que son vertices y establezco que valor de arista tienen 
         
-        do{
-            Load_Colors();
-            
-        }while(quantity_Mine() != TOTAL_MINE);
+        Load_Colors(0, 0);
     }
     
     /**

@@ -22,6 +22,8 @@ public class K_Color_Controller {
         
         colorModel =  new K_Color_Model();
         addEvente_Table();
+        colorModel.getColor_view().paint_table();
+        System.out.println(colorModel.quantity_Mine());
     }
 
     public K_Color_Model getColorModel() {
